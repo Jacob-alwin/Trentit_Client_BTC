@@ -1,0 +1,51 @@
+@import "globals.scss";
+
+.list {
+  display: flex;
+  padding: 5vw;
+  justify-content: space-between;
+  .filtercontainer {
+    div {
+      border-radius: 1vw;
+      width: 25vw;
+      margin-bottom: 1vw;
+      height: 25vw;
+      background-color: #fcffff;
+      outline: 0.1vw solid $quationary;
+    }
+  }
+  .itemcontainer {
+    .item {
+      width: 60vw;
+      background-color: #fcffff;
+      outline: 0.2vw solid #ececec;
+      border-radius: 1vw;
+      display: flex;
+      align-items: center;
+      transition: all ease 0.1s;
+
+      &:hover {
+        transition: all ease 0.2s;
+        outline: 0.4vw solid #ececec;
+      }
+
+      img {
+        width: 20vw;
+        object-fit: contain;
+        height: 20vw;
+        padding: 1vw;
+      }
+      div {
+        height: 20vw;
+        padding: 1vw;
+        h3 {
+          font-size: 2.2vw;
+        }
+        h5 {
+          font-weight: 300;
+          font-size: 1.2vw;
+        }
+      }
+    }
+  }
+}

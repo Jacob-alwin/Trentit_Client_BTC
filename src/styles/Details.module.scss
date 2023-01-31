@@ -1,0 +1,889 @@
+@import "globals.scss";
+.LapDetails {
+  padding: 5% 5%;
+
+  .Carousel {
+    height: 30vw;
+    width: 100%;
+    padding: 2vw;
+    border-radius: 3vw;
+    padding: 0 5%;
+
+    // background: $secondary;
+    img {
+      height: 30vw;
+      width: 30vw;
+      object-fit: cover;
+      border-radius: 2vw;
+    }
+
+    ::selection {
+      background: transparent;
+    }
+  }
+
+  .popContainer {
+    z-index: 100;
+    margin: -15% -5%;
+    height: 110%;
+    display: flex;
+    position: fixed;
+    width: 100%;
+
+    .popimage {
+      z-index: 101;
+      margin: auto;
+      height: 700px;
+      object-fit: cover;
+      width: 700px;
+      border-radius: 2vw;
+      cursor: none;
+    }
+
+    button {
+      cursor: default;
+      outline: none;
+      border: none;
+      background: rgba(255, 255, 255, 0.616);
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .Container {
+    // background-color: aqua;
+    color: $teritary;
+    height: max-content;
+
+    margin: 3vw 0;
+
+    .Slide {
+      width: 40%;
+      // height: 100%;
+
+      .ShortDes {
+        width: 40vw;
+        border-radius: 1vw;
+        background: $secondary;
+        padding: 1vw 2vw;
+        text-align: justify;
+        margin-bottom: 2vw;
+        letter-spacing: 0.1vw;
+        font-size: 1vw;
+
+        display: flex;
+        flex-wrap: wrap;
+
+        p {
+          margin-right: 0.5vw;
+          width: max-content;
+          border-radius: 0.5vw;
+          background-color: $primary;
+          border: 0.1vw solid $quationary;
+
+          padding: 0.5vw;
+        }
+      }
+
+      .LongDes {
+        width: 40vw;
+        border-radius: 1.5vw;
+        color: $teritary;
+        padding: 2vw;
+        max-height: max-content;
+
+        .Configurations {
+          // background: $secondary;
+
+          max-height: 32vw;
+
+          h1 {
+            font-size: 1.2vw;
+            margin-bottom: 2vw;
+          }
+
+          ul {
+            padding: 0.5vw;
+            height: 32vw;
+            overflow-y: auto;
+
+            /* width */
+            &::-webkit-scrollbar {
+              width: 5px;
+            }
+
+            /* Track */
+            &::-webkit-scrollbar-track {
+              margin: 5vw 5vw;
+              background: #f5f5f5;
+
+              border-radius: 10vw;
+              transition: all 2.5s ease;
+
+              &:hover {
+                background: #f1f1f1;
+              }
+            }
+
+            /* Handle */
+            &::-webkit-scrollbar-thumb {
+              background: $quationary;
+              border-radius: 10vw;
+
+              /* Handle on hover */
+              &:hover {
+                background: $quationarydark;
+              }
+            }
+
+            li {
+              h2 {
+                font-size: 1vw;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .Details {
+      width: 45%;
+
+      .ShortInfo {
+        width: 40vw;
+        position: relative;
+        border-radius: 1vw;
+        background: $secondary;
+        height: 18vw;
+        margin-bottom: 2vw;
+        cursor: default;
+        letter-spacing: 0.2vw;
+
+        h1 {
+          position: absolute;
+          top: 2vw;
+          left: 2vw;
+          font-size: 1.2vw;
+          transition: all 0.5s ease;
+
+          &:hover {
+            transition: all 0.5s ease;
+            letter-spacing: 0.1vw;
+          }
+        }
+
+        li {
+          position: absolute;
+          bottom: 2vw;
+          left: 2vw;
+          display: flex;
+          list-style: none;
+
+          h2 {
+            font-size: 1.5vw;
+            transition: all 0.5s ease;
+
+            &:hover {
+              transition: all 0.5s ease;
+              letter-spacing: 0.1vw;
+            }
+          }
+
+          h6 {
+            margin-bottom: 0.7vw;
+            align-self: flex-end;
+            font-size: 0.6vw;
+
+            transition: all 0.5s ease;
+
+            &:hover {
+              transition: all 0.5s ease;
+              letter-spacing: 0.1vw;
+            }
+          }
+        }
+
+        h3 {
+          position: absolute;
+          top: 5vw;
+          left: 2vw;
+          font-size: 0.9vw;
+          display: flex;
+          transition: all 0.5s ease;
+
+          p {
+            opacity: 0;
+            font-size: 0.7vw;
+          }
+
+          &:hover {
+            transition: all 0.5s ease;
+            letter-spacing: 0.1vw;
+
+            p {
+              margin-left: 0.2vw;
+              opacity: 1;
+            }
+          }
+        }
+
+        h4 {
+          display: flex;
+
+          position: absolute;
+          top: 6.5vw;
+          left: 2vw;
+          font-size: 0.9vw;
+          transition: all 0.5s ease;
+
+          p {
+            opacity: 0;
+            font-size: 0.7vw;
+          }
+
+          &:hover {
+            transition: all 0.5s ease;
+            letter-spacing: 0.1vw;
+
+            p {
+              margin-top: 0.2vw;
+              margin-left: 0.2vw;
+              opacity: 1;
+            }
+          }
+        }
+
+        h5 {
+          position: absolute;
+          right: 2vw;
+          bottom: 2vw;
+          font-size: 0.8vw;
+          transition: all 0.5s ease;
+
+          &:nth-of-type(1) {
+            bottom: 3.5vw;
+          }
+
+          &:hover {
+            transition: all 0.5s ease;
+            letter-spacing: 0.1vw;
+          }
+        }
+
+        .favourite {
+          position: absolute;
+          top: 2vw;
+          right: 3vw;
+          background: $transparent-background-light;
+          border-radius: 15%;
+          width: 2.2vw;
+          height: 2.2vw;
+          // align-items: center;
+          text-align: center;
+          justify-content: center;
+          cursor: pointer;
+
+          i {
+            font-size: 2vw;
+
+            &:first-child {
+              margin-right: 2vw;
+            }
+          }
+        }
+      }
+
+      iframe {
+        width: 40vw;
+        height: 17vw;
+        margin-bottom: 2vw;
+        border-radius: 1vw;
+      }
+
+      .SellerInfo {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 40vw;
+        margin: 1vw 0;
+        border-radius: 1vw;
+        background: $secondary;
+        letter-spacing: 0.1vw;
+        padding: 2vw;
+
+        button {
+          height: max-content;
+          width: 20vw;
+
+          background: transparent;
+          color: $quationary;
+          border: 0.1vw solid $secondary;
+
+          &:hover {
+            border: 0.1vw solid $fade;
+          }
+        }
+
+        h2 {
+          font-size: 1.2vw;
+        }
+
+        .SellerMessage {
+          border-radius: 0.5vw;
+          padding: 1vw;
+          font-size: 1vw;
+
+          border: 0.1 solid $quationary;
+          background-color: $primary;
+
+          input {
+            transition: all ease 0.5s;
+
+            width: 10vw;
+            background-color: transparent;
+
+            outline: none;
+            border: none;
+
+            &:focus {
+              width: 15vw;
+              transition: all ease 0.5s;
+            }
+          }
+        }
+      }
+
+      .bottomBanner {
+        padding: 0 5%;
+        z-index: -100;
+        // margin-top: 4vw;
+        display: flex;
+        align-items: center;
+        // background: #e5e4ec;
+        justify-content: space-between;
+
+        .sellBanner {
+          padding: 1vw 0;
+          // outline: 0.2vw solid $quationary;
+          height: 8vw;
+          outline-offset: -0.2vw;
+          width: 40vw;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          border-radius: 17px;
+          position: relative;
+
+          h2 {
+            font-size: 1.8vw;
+            letter-spacing: 0.05vw;
+            font-weight: 400;
+            width: 18vw;
+          }
+
+          h3 {
+            letter-spacing: 0.1vw;
+            margin-bottom: 1.5vw;
+            font-weight: 300;
+            font-size: 2.4vw;
+          }
+
+          button {
+            width: 13vw;
+            border-radius: 10vw;
+            height: 6vw;
+            border: none;
+            position: relative;
+            display: flex;
+            align-items: center;
+            // background: $quationary;
+
+            &:hover {
+              span {
+                border-radius: 10vw;
+                height: 6vw;
+                left: 0vw;
+                background: $quationarydark;
+                width: 13vw;
+                transition: all ease 0.5s 0.5s, background ease 0.5s;
+
+                &::after {
+                  transition: all ease 1s 0.5s;
+
+                  opacity: 1;
+                }
+              }
+            }
+
+            .currency {
+              width: 5vw;
+              position: absolute;
+              left: 0.7vw;
+              top: 0.5vw;
+              height: 5vw;
+              border-radius: 50%;
+              outline-offset: -0.6vw;
+              outline: 0.3vw solid $primary;
+              color: $teritary;
+              background: $quationary;
+              transition: all ease 0.5s;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+
+              img {
+                align-self: center;
+                width: 1.2vw;
+                color: #e5e4ec;
+                height: max-content;
+              }
+            }
+
+            h5 {
+              font-size: 2vw;
+              margin-top: 0.5vw;
+              margin-left: 7vw;
+              color: $teritary;
+              font-weight: 500;
+              letter-spacing: 0.1vw;
+            }
+
+            span {
+              position: absolute;
+              z-index: 10;
+              width: 4vw;
+              left: 1.2vw;
+
+              border-radius: 100vw;
+              // color: #28158d;
+              height: 4vw;
+              transition: all ease 0.3s, background ease 0.5s 0.3s;
+
+              background: transparent;
+
+              &::after {
+                content: "Sell";
+                font-size: 3vw;
+                opacity: 0;
+                letter-spacing: 0.5vw;
+                font-weight: 700;
+                color: $primary;
+                left: 3.5vw;
+                position: absolute;
+                top: 0.8vw;
+              }
+            }
+          }
+        }
+
+        .rightBanner {
+          text-align: start;
+          // padding: 0 8%;
+          position: relative;
+          // background-color: white;
+          height: 12vw;
+          width: 40%;
+          display: flex;
+          flex-direction: column;
+          border-radius: 17px;
+          align-items: flex-start;
+
+          h6 {
+            font-size: 1.2vw;
+            font-weight: 300;
+            letter-spacing: 0.05vw;
+            margin-bottom: 2vw;
+            text-align: start;
+
+            align-self: flex-start;
+            width: 28vw;
+            // background-color: #3e379a;
+
+            span {
+              color: $quationarydark;
+              font-weight: 600;
+            }
+          }
+
+          h5 {
+            font-size: 1.8vw;
+            font-weight: 300;
+            letter-spacing: 0.05vw;
+            margin-bottom: 2vw;
+          }
+
+          h4 {
+            font-size: 0;
+            margin: 0;
+            font-weight: 400;
+            letter-spacing: 0.5vw;
+            margin-bottom: 2vw;
+
+            .countdown {
+              font-size: 0;
+              margin: 5vw;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .RelatedAds {
+    background: $secondary;
+    width: 100%;
+    height: 20vw;
+
+    .carousel {
+      height: 20vw;
+      width: 100%;
+      padding: 2vw;
+      margin: 10vw 0;
+      padding: 0 0%;
+
+      // background: $secondary;
+    }
+  }
+}
+
+.MobileDetails {
+  padding: 5% 5%;
+
+  .Carousel {
+    height: 45vw;
+    width: 100%;
+    padding: 2vw;
+    margin: 10vw 0;
+    border-radius: 10vw;
+    padding: 0 0%;
+
+    img {
+      border-radius: 2vw;
+    }
+
+    // background: $secondary;
+  }
+
+  .imgcar {
+    background-color: aquamarine;
+    height: 40vw;
+    width: 40vw;
+    object-fit: cover;
+    border-radius: 5vw;
+  }
+
+  .popContainer {
+    z-index: 10;
+    margin: -25% -5%;
+    height: 110%;
+    display: flex;
+    width: 100%;
+    position: fixed;
+
+    .popimage {
+      z-index: 1;
+      margin: auto;
+      height: 90vw;
+      object-fit: cover;
+      width: 90vw;
+      border-radius: 2vw;
+      cursor: none;
+    }
+
+    button {
+      cursor: default;
+      outline: none;
+      border: none;
+      background: rgba(0, 0, 0, 0.822);
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .Container {
+    color: $teritary;
+
+    margin: 3vw 0;
+    height: 100%;
+
+    // .Image{
+    //     width: 100%;
+    //     height: 40vw;
+
+    //     img{
+
+    //         width: 35vw;
+    //         height: 35vw;
+
+    //     }
+
+    // }
+
+    .Details {
+      width: 100%;
+
+      .ShortInfo {
+        width: 90vw;
+        position: relative;
+        border-radius: 1vw;
+        background: $secondary;
+        height: 35vw;
+        margin-bottom: 2vw;
+        cursor: default;
+        letter-spacing: 0.2vw;
+
+        h1 {
+          position: absolute;
+          top: 2vw;
+          left: 2vw;
+          font-size: 4vw;
+          transition: all 0.5s ease;
+
+          &:hover {
+            transition: all 0.5s ease;
+            letter-spacing: 0.1vw;
+          }
+        }
+
+        li {
+          position: absolute;
+          bottom: 2vw;
+          left: 2vw;
+          display: flex;
+          list-style: none;
+
+          h2 {
+            font-size: 4vw;
+            transition: all 0.5s ease;
+
+            &:hover {
+              transition: all 0.5s ease;
+              letter-spacing: 0.1vw;
+            }
+          }
+
+          h6 {
+            margin-bottom: 2.5vw;
+            align-self: flex-end;
+            font-size: 1.5vw;
+            transition: all 0.5s ease;
+
+            &:hover {
+              transition: all 0.5s ease;
+              letter-spacing: 0.1vw;
+            }
+          }
+        }
+
+        h3 {
+          position: absolute;
+          top: 9vw;
+          left: 2vw;
+          font-size: 3vw;
+          width: 45vw;
+          display: flex;
+          justify-content: space-between;
+          transition: all 0.5s ease;
+
+          p {
+            opacity: 1;
+            // background: #421ab1;
+            width: 15vw;
+            font-size: 2vw;
+            margin-left: 1.2vw;
+          }
+
+          &:hover {
+            transition: all 0.5s ease;
+            letter-spacing: 0.1vw;
+
+            p {
+              margin-left: 0.2vw;
+              opacity: 1;
+            }
+          }
+        }
+
+        h4 {
+          display: flex;
+          position: absolute;
+          top: 12.5vw;
+          left: 2vw;
+          font-size: 3vw;
+
+          width: 45vw;
+          display: flex;
+          justify-content: space-between;
+          transition: all 0.5s ease;
+
+          p {
+            width: 15vw;
+            align-self: baseline;
+            opacity: 1;
+            font-size: 2vw;
+            // margin-top: 1vw;
+            margin-left: 1.2vw;
+          }
+
+          &:hover {
+            transition: all 0.5s ease;
+            letter-spacing: 0.1vw;
+
+            p {
+              opacity: 1;
+            }
+          }
+        }
+
+        h5 {
+          position: absolute;
+          right: 2vw;
+          bottom: 2vw;
+          font-size: 3vw;
+          transition: all 0.5s ease;
+
+          &:nth-of-type(1) {
+            bottom: 6.5vw;
+          }
+
+          &:hover {
+            transition: all 0.5s ease;
+            letter-spacing: 0.1vw;
+          }
+        }
+
+        .favourite {
+          position: absolute;
+          top: 2vw;
+          right: 0vw;
+          background: $transparent-background-light;
+          border-radius: 15%;
+          width: max-content;
+
+          height: 5vw;
+          // align-items: center;
+          text-align: center;
+          justify-content: center;
+          cursor: pointer;
+
+          i {
+            font-size: 5vw;
+
+            &:first-child {
+              margin-right: 5vw;
+            }
+          }
+        }
+      }
+
+      .ShortDes {
+        width: 90vw;
+        border-radius: 1vw;
+        background: $secondary;
+        padding: 1vw 2vw;
+        text-align: justify;
+        margin-bottom: 2vw;
+        letter-spacing: 0.1vw;
+        font-size: 3vw;
+
+        display: flex;
+        flex-wrap: wrap;
+
+        p {
+          margin-right: 1.5vw;
+          width: max-content;
+          border-radius: 1vw;
+          background-color: $primary;
+          border: 0.3vw solid $quationary;
+
+          padding: 1vw;
+        }
+      }
+
+      .SellerInfo {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 90vw;
+        border-radius: 1vw;
+        background: $secondary;
+        letter-spacing: 0.1vw;
+        margin-bottom: 2vw;
+        padding: 2vw;
+
+        button {
+          height: max-content;
+          width: 90vw;
+
+          background: transparent;
+          color: $quationarydark;
+          border: 0.1vw solid $secondary;
+
+          &:hover {
+            border: 0.1vw solid $fade;
+          }
+        }
+
+        h2 {
+          font-size: 3vw;
+        }
+
+        .SellerMessage {
+          border-radius: 2vw;
+          padding: 2vw;
+          font-size: 3vw;
+
+          border: 0.1 solid $quationary;
+          background-color: $primary;
+
+          input {
+            transition: all ease 0.5s;
+
+            width: 20vw;
+            background-color: transparent;
+
+            outline: none;
+            border: none;
+
+            &:focus {
+              width: 30vw;
+              transition: all ease 0.5s;
+            }
+          }
+        }
+      }
+
+      .LongDes {
+        width: 90vw;
+        border-radius: 0.5vw;
+        background: $secondary;
+        color: $teritary;
+        height: max-content;
+        padding: 2vw;
+
+        h1 {
+          font-size: 4vw;
+          margin-bottom: 2vw;
+        }
+
+        ul {
+          padding: 1vw;
+
+          li {
+            h2 {
+              font-size: 3vw;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .RelatedAds {
+    background: $secondary;
+    width: 100%;
+    height: 20vw;
+  }
+}

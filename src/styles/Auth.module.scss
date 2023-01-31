@@ -1,0 +1,494 @@
+@import "globals.scss";
+
+.authBackground {
+  display: flex;
+  height: 80vh;
+  align-items: center;
+  justify-content: center;
+  z-index: 9;
+  .backbuttonContainer {
+    position: absolute;
+    margin: 1vw 1vw;
+    font-size: 3.2vw;
+    width: 5vw;
+    height: 5vw;
+    top: 0;
+    left: 0;
+    display: flex;
+    border: 0.25vw solid black;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border-radius: 50%;
+    z-index: 1;
+    transition: all ease 0.3s;
+
+    i {
+      font-size: inherit;
+    }
+
+    &:hover {
+      border: 0.25vw solid $fade;
+      cursor: pointer;
+      color: $fade;
+      transition: all ease 0.3s;
+    }
+  }
+
+  .authContainer {
+    padding: 4vw;
+
+    /* this is what centers your element in the fixed wrapper*/
+
+    /* aligns on vertical for column */
+    // align-items: center;
+    /* aligns on ho3rizontal for column */
+
+    .signInContainer {
+      animation: myAnim 25s cubic-bezier(0.11, 0, 0.5, 0) 1s infinite
+        alternate-reverse both;
+      transition: all ease 3s;
+      // width: max-content;
+      // height: max-content;
+      padding: 3vw;
+      border-radius: 2vw;
+      // background-color: aqua;
+      display: block;
+      // background: rgba(128, 255, 0, 0.192);
+      text-align: center;
+
+      .signInText {
+        font-weight: 500;
+        font-size: 2vw;
+      }
+
+      hr {
+        width: 40%;
+        margin: 1vw 30%;
+      }
+
+      .nameInput {
+        width: 20vw;
+        margin-top: 1vw;
+        padding: 0.8vw 0.8vw 0.4vw 0.4vw;
+        background: transparent;
+        font-size: 1vw;
+        outline: none;
+        border: 0.01vw solid $transparent-background-dark;
+        border-radius: 0.5vw;
+        transition: all ease 0.5s;
+
+        &:focus {
+          border: 0.1vw solid $primary;
+          color: $teritary;
+
+          transition: all ease 0.5s;
+          background: $secondary;
+        }
+
+        &::placeholder {
+          color: $transparent-background-dark;
+          font-size: 1vw;
+        }
+      }
+
+      .signInButton {
+        background: $quationarydark;
+        border-radius: 0.5vw;
+        width: 20vw;
+        padding: 0.9vw;
+        font-size: 1vw;
+        transition: all ease 0.5s;
+        margin: 1vw auto;
+        border: none;
+        cursor: pointer;
+        color: $secondary;
+
+        &:hover {
+          border: 0.1vw solid $quationarydark;
+          background-color: $authContainer-signInButton-light-hover;
+          color: $teritary;
+          transition: all ease 0.5s;
+        }
+      }
+    }
+  }
+
+  br {
+    margin: 0;
+  }
+}
+
+.MauthBackground {
+  height: 100vh;
+  overflow: fixed;
+  display: flex;
+  background-color: #f6f7fb;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cg fill-rule='evenodd'%3E%3Cg id='hexagons' fill='%23bdcecc' fill-opacity='0.2' fill-rule='nonzero'%3E%3Cpath d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+
+  .backbuttonContainer {
+    position: absolute;
+    margin: 3vw 3vw;
+    font-size: 5.2vw;
+    width: 10vw;
+    height: 10vw;
+    top: 0;
+    left: 0;
+    display: flex;
+    border: 0.6vw solid $teritary;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border-radius: 50%;
+    z-index: 1;
+    transition: all ease 0.3s;
+
+    i {
+      font-size: inherit;
+    }
+
+    &:hover {
+      border: 0 solid $fade;
+      cursor: pointer;
+      color: $primary;
+      background-color: $teritary;
+      transition: all ease 0.3s;
+    }
+  }
+
+  .authContainer {
+    margin-top: 20vw;
+    padding: 4vw;
+    // background-color: aquamarine;
+    height: max-content;
+    width: 100%;
+
+    /* this is what centers your element in the fixed wrapper*/
+    flex-wrap: wrap;
+    justify-content: center;
+    /* aligns on vertical for column */
+    align-items: center;
+    /* aligns on ho3rizontal for column */
+
+    .Imagecontainer {
+      width: 100%;
+      padding: 2% 5%;
+      display: block;
+
+      p {
+        font-size: 3.2vw;
+        margin-left: 3vw;
+      }
+
+      img {
+        // background-color: aqua;
+
+        justify-content: center;
+        width: 100%;
+        height: max-content;
+      }
+    }
+
+    .signInContainer {
+      // background-color: aqua;
+      margin: 5%;
+      transition: all ease 3s;
+      width: 90%;
+      height: max-content;
+      padding: 3vw;
+      background-color: $authContainer-background-light;
+      border-radius: 2vw;
+      display: block;
+      // background: rgba(128, 255, 0, 0.192);
+      text-align: center;
+
+      .signInText {
+        font-weight: 500;
+        font-size: 6vw;
+      }
+
+      h4 {
+        font-size: 3vw;
+        margin: 0;
+      }
+
+      .googleButton {
+        width: 70vw;
+        margin: auto;
+        justify-content: center;
+        border: 0.1vw solid $teritary;
+        border-radius: 1.5vw;
+        background: transparent;
+        font-weight: 400;
+
+        padding: 2vw;
+        margin-top: 8vw;
+
+        &:hover {
+          transition: all ease 0.5s;
+          background: $primary;
+          border: 0.1vw solid $secondary;
+        }
+
+        img {
+          width: 5vw;
+        }
+      }
+
+      .facebookButton {
+        width: 70vw;
+        margin: auto;
+        justify-content: center;
+        border: 0.1vw solid $teritary;
+        border-radius: 1.5vw;
+        font-weight: 400;
+        font-size: 20px;
+        padding: 2vw;
+        margin-top: 3vw;
+
+        &:hover {
+          transition: all ease 0.5s;
+          background: $primary;
+          border: 0.1vw solid $secondary;
+        }
+
+        img {
+          width: 5vw;
+        }
+      }
+
+      .orText {
+        font-weight: 500;
+        margin: 1vw 0;
+        font-size: 1.2vw;
+      }
+
+      hr {
+        width: 40%;
+        margin: 5vw 30%;
+      }
+
+      .Carousel {
+        // background: transparent;
+        // display: none;
+        margin: 2vw;
+
+        // background-color: transparent;
+        border-radius: 50%;
+        height: 20vw;
+        width: 20vw;
+        // background: #0000;
+
+        img {
+          width: 20vw;
+
+          border-radius: 50%;
+        }
+      }
+
+      .emailInput {
+        width: 70vw;
+        padding: 2.8vw 2.8vw 2.4vw 2.4vw;
+        background: transparent;
+        font-size: 4vw;
+        margin-top: 4vw;
+        outline: none;
+        border: 0.1vw solid $teritary;
+        border-radius: 1.5vw;
+        transition: all ease 0.5s;
+
+        &:focus {
+          border: 0.1vw solid $primary;
+          color: $teritary;
+
+          transition: all ease 0.5s;
+          background: $secondary;
+        }
+
+        &::placeholder {
+          color: $transparent-background-dark;
+          font-size: 4vw;
+        }
+      }
+      .nameInput {
+        width: 70vw;
+        padding: 2.8vw 2.8vw 2.4vw 2.4vw;
+        background: transparent;
+        font-size: 4vw;
+        outline: none;
+        border: 0.1vw solid $teritary;
+        border-radius: 1.5vw;
+        transition: all ease 0.5s;
+
+        &:focus {
+          border: 0.1vw solid $primary;
+          color: $teritary;
+
+          transition: all ease 0.5s;
+          background: $secondary;
+        }
+
+        &::placeholder {
+          color: $transparent-background-dark;
+          font-size: 4vw;
+        }
+      }
+
+      .passwordInput {
+        width: 70vw;
+
+        padding: 2.8vw 2.8vw 2.4vw 2.4vw;
+        background: transparent;
+        margin-top: 4vw;
+        font-size: 4vw;
+        border: 0.1vw solid $teritary;
+        outline: none;
+        transition: all ease 0.5s;
+        border-radius: 1.5vw;
+
+        &:focus {
+          border: 0.1vw solid $primary;
+          color: $teritary;
+          transition: all ease 0.5s;
+          background: $secondary;
+        }
+
+        &::placeholder {
+          font-size: 4vw;
+          color: $transparent-background-dark;
+        }
+      }
+
+      select {
+        font-size: 5vw;
+        margin: 0 5%;
+        padding: 2.8vw 2.8vw 2.4vw 2.4vw;
+        width: 70vw;
+        color: $teritary;
+        // height: 4vw;
+        background: transparent;
+        outline: none;
+        display: flex;
+        position: relative;
+        border-radius: 1.4vw;
+        border: 0.1vw solid $teritary;
+        letter-spacing: 0.1vw;
+        transition: all ease 0.3s;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        -ms-appearance: none;
+
+        .option {
+          padding: 1vw;
+          color: $teritary;
+          font-size: 3.5vw;
+          letter-spacing: 0.1vw;
+        }
+
+        &:disabled {
+          -webkit-user-select: none;
+          /* Safari */
+          -ms-user-select: none;
+          /* IE 10 and IE 11 */
+          user-select: none;
+          color: $fade;
+          border: 0.1vw solid $transparent-background-dark;
+          background: $primary;
+
+          &:hover {
+            letter-spacing: 0.1vw;
+            background: $primary;
+            border: 0.1vw solid transparent;
+            padding: 0.8vw 0.8vw 0.4vw 0.4vw;
+            transition: all ease 0.5s;
+          }
+        }
+
+        &:hover {
+          letter-spacing: 0.2vw;
+          background: $primary;
+          border: 0.1vw solid $quationary;
+          padding: 3vw;
+
+          transition: all ease 0.5s;
+        }
+
+        &:focus {
+          border: 0.1vw solid $teritary;
+          transition: all ease 0.5s;
+        }
+      }
+
+      .signInButton {
+        background: $authContainer-signInButton-light;
+        border-radius: 1.5vw;
+        width: 70vw;
+        padding: 3vw;
+        font-size: 5vw;
+        transition: all ease 0.5s;
+        margin: 5vw auto;
+        border: none;
+        cursor: pointer;
+        color: $secondary;
+
+        &:hover {
+          border: 0.1vw solid $teritary;
+          background-color: $authContainer-signInButton-light-hover;
+          color: $teritary;
+          transition: all ease 0.5s;
+        }
+      }
+
+      .toSignUpLinks {
+        margin: 0 5%;
+        margin-top: 1vw;
+
+        h5 {
+          font-size: 2.9vw;
+        }
+
+        .signUpLink {
+          color: brown;
+          cursor: pointer;
+          transition: all ease 0.2s;
+
+          &:hover {
+            color: $teritary;
+            transition: all ease 0.2s;
+          }
+        }
+      }
+
+      .forgotPassword {
+        margin-top: 3.3vw;
+        font-size: 2.8vw;
+        cursor: pointer;
+        color: $teritary;
+        transition: all ease 0.2s;
+
+        &:hover {
+          color: $fade;
+          transition: all ease 0.2s;
+        }
+      }
+    }
+
+    .lapForgetPasswordInput {
+      margin: 1vw 0;
+      width: auto;
+      font-size: 3vw;
+      text-align: center;
+      justify-content: center;
+      padding: 0 0vw;
+      border-radius: 0.4vw;
+      color: $teritary;
+      border: 0.1vw solid $teritary;
+      background: transparent;
+    }
+  }
+
+  br {
+    margin: 0;
+  }
+}

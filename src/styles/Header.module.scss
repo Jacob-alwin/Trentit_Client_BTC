@@ -1,0 +1,388 @@
+@import "globals.scss";
+$tl: 0.6s;
+
+.header {
+  margin: 0 4%;
+  padding: 0 1vw;
+  position: relative;
+  z-index: 25;
+  height: 12vw;
+  transition: background-color 0.5s ease, padding ease 0.5s 0.5s;
+
+  border-radius: 2vw;
+
+  .outerIcons {
+    padding-top: 1vw;
+    font-size: 1.7vw;
+    font-weight: 600;
+
+    .Location {
+      // font-size: 1.5vw;
+      padding: 0.9vw;
+      border-radius: 0.5vw;
+      cursor: pointer;
+      // transform: scaleX(1);
+      width: max-content;
+      background: $secondary;
+      height: 3.5vw;
+      transition: top ease 1s, padding ease 1s, left ease 1s, height ease 1.2s,
+        opacity ease 1.2s;
+
+      h4 {
+        font-size: 1.2vw;
+        width: max-content;
+        font-weight: 300;
+        letter-spacing: 0.2vw;
+      }
+
+      &:hover {
+        background: $secondary;
+        text-align: start;
+        top: 0;
+        left: 0;
+        // height: 100%;
+
+        h4 {
+          transition: opacity ease 1s 1s;
+        }
+
+        ul {
+          margin-top: 0;
+          border-radius: 0.5vw;
+          overflow-y: auto;
+          /* width */
+          &::-webkit-scrollbar {
+            width: 5px;
+          }
+
+          /* Track */
+          &::-webkit-scrollbar-track {
+            margin: 1vw;
+            background: $quationary;
+            border-radius: 10vw;
+            transition: all 2.5s ease;
+
+            &:hover {
+              background: #f1f1f1;
+            }
+          }
+
+          /* Handle */
+          &::-webkit-scrollbar-thumb {
+            background: $quationarydark;
+            border-radius: 10vw;
+
+            /* Handle on hover */
+            &:hover {
+              background: $quationarydark;
+            }
+          }
+
+          li {
+            opacity: 1;
+            font-size: 1vw;
+            position: relative;
+
+            h6 {
+              font-size: 0.7vw;
+            }
+          }
+        }
+      }
+
+      ul {
+        margin-top: -2vw;
+        z-index: -10;
+        position: absolute;
+        list-style: none;
+        padding: 1vw;
+        background-color: $secondary;
+        margin-left: -0.9vw;
+        // width: inherit;
+        border-radius: 0vw;
+        max-height: 10vw;
+        // direction: rtl;
+        color: $teritary;
+        overflow: auto;
+        overflow-y: hidden;
+        overflow-x: hidden;
+
+        li {
+          font-size: 0vw;
+          opacity: 0;
+          // display: none;
+          font-weight: 300;
+          color: $teritary;
+          padding: 0;
+          background-color: $secondary;
+          // display: none;
+          transition: all ease 0.5s;
+
+          h6 {
+            font-size: 0vw;
+          }
+
+          ul {
+            // position: absolute;
+            margin: 0;
+            // background-color: $secondary;
+            padding: 0;
+            padding-left: 10%;
+            opacity: 0;
+            top: 0;
+            list-style: none;
+            border-radius: 1vw;
+            // transition: opacity ease  .5s,padding ease 1s;
+            // transition: all ease .5s;
+
+            li {
+              list-style: none;
+              padding: 0 0.5vw;
+              width: max-content;
+              margin: 0.2vw;
+              border-radius: 0.3vw;
+              font-size: 0.7vw;
+
+              background: $secondary;
+            }
+          }
+
+          &:hover {
+            color: $quationarydark;
+            padding: 0.2vw;
+            transition: all ease 0.5s;
+
+            ul {
+              padding-left: 10%;
+              opacity: 1;
+              font-size: 0vw;
+              margin-left: 100%;
+              // transition: opacity ease  .5s,padding ease 1s;
+
+              transition: all ease 1s 0.5s;
+
+              li {
+                font-size: 0.7vw;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    img {
+      width: 2vw;
+      color: aqua;
+
+      // background-color: #f6f7fb8c;
+      span {
+        position: absolute;
+        width: 0.6vw;
+        height: 0.6vw;
+        background-color: rgb(228, 0, 0);
+        border-radius: 50%;
+        top: 0.4vw;
+        right: 0.1vw;
+      }
+    }
+
+    .icons {
+      span {
+        position: absolute;
+        width: 0.6vw;
+        height: 0.6vw;
+        background-color: rgb(228, 0, 0);
+        border-radius: 50%;
+        top: 0.4vw;
+        right: 0.1vw;
+      }
+
+      .profileIcon {
+        margin-right: 0vw;
+        margin-top: auto;
+        // width: fit-content;
+        height: 3vw;
+        display: flex;
+        font-size: 2vw;
+        letter-spacing: 0.1vw;
+        justify-content: center;
+        align-items: center;
+        &:hover {
+          & ~ .profile {
+            background-color: $quationary;
+            opacity: 0;
+          }
+        }
+      }
+
+      button {
+        font-size: 1.3vw;
+        width: 6vw;
+      }
+    }
+
+    .profile {
+      position: absolute;
+      background-color: $primary;
+      outline: 0.1vw solid $quationary;
+      z-index: 10;
+      height: 21vw;
+      padding: 2vw 0;
+      border-radius: 1vw 0vw 1vw 1vw;
+      right: 2vw;
+      width: 30vw;
+      top: 8vw;
+      opacity: 1;
+
+      div {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 2vw;
+        height: 4vw;
+        cursor: pointer;
+        background: $secondary;
+        margin: 0.5vw 0;
+        align-items: center;
+        h5 {
+          background: transparent;
+          color: $teritary;
+          font-size: 1.5vw;
+        }
+
+        &:first-child {
+          padding: 0;
+          cursor: default;
+          height: 0vw;
+
+          justify-content: space-around;
+          margin: 3vw 0;
+        }
+
+        &:hover {
+        }
+      }
+    }
+
+    i {
+      margin-right: 2.5vw;
+      cursor: pointer;
+      color: $teritary;
+    }
+  }
+
+  .logo {
+    margin-top: 1vw;
+    width: 12vw;
+    cursor: pointer;
+  }
+
+  .search {
+    display: flex;
+
+    input {
+      transition: all ease 1s;
+      border: none;
+      border-radius: 1vw;
+      font-size: 1.2vw;
+      margin: 0;
+      height: 3.5vw;
+      width: 25vw;
+      font-weight: 300;
+      outline: none;
+      padding: 1vw;
+      padding-right: 4vw;
+
+      &:focus {
+        transition: all ease 1s;
+        border-radius: 1vw;
+        box-shadow: inset 0 0 0.05vw 0.05vw $quationary;
+        border-color: beige;
+        width: 25vw;
+        outline: none;
+
+        ~ i {
+          margin-left: -3vw;
+          height: 3.5vw;
+          opacity: 1;
+          transition: all ease 1s;
+        }
+      }
+    }
+
+    i {
+      margin-left: -3vw;
+      z-index: 4;
+      font-size: 1.2vw;
+      border-radius: 1vw;
+      display: flex;
+      padding: 0.2vw;
+      font-weight: 300;
+      color: $fade;
+      height: 3.5vw;
+      align-items: center;
+      transition: all ease 1.5s;
+    }
+  }
+}
+
+.Mheader {
+  padding: 1% 5%;
+  // border-radius: 3vw;
+  width: 100%;
+  height: 15vw;
+  background: #f6f7fb8c;
+
+  .logo {
+    width: 33vw;
+    height: 10vw;
+    cursor: pointer;
+  }
+
+  .search {
+    background: greenyellow;
+
+    border: 0.1vw solid $footer-secondary;
+    border-radius: 4vw;
+
+    input {
+      transition: all ease 1s;
+      border-radius: 3vw;
+      font-size: 4.2vw;
+      margin: 0;
+      height: 10vw;
+      outline: none;
+      border: none;
+      width: 45vw;
+      font-weight: 300;
+      padding: 1vw;
+
+      &:focus {
+        transition: all ease 1s;
+        border-radius: 3vw;
+        width: 48vw;
+        outline: none;
+        border: none;
+        box-shadow: none;
+
+        ~ button {
+          opacity: 1;
+          color: $teritary;
+          transition: all ease 0.5s;
+        }
+      }
+    }
+
+    i {
+      background-color: $secondary;
+      z-index: 4;
+      border-radius: 3vw;
+      color: $fade;
+      width: 8vw;
+      font-size: 5.2vw;
+      padding: -1.5vw -5vw 5vw -5vw;
+      margin-left: -6vw;
+      font-weight: 300;
+      transition: all ease 1.5s;
+    }
+  }
+}
