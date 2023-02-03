@@ -1,8 +1,66 @@
 import React, { Fragment, useState } from "react";
 import styles from "@/styles/Auth.module.scss";
 import { motion } from "framer-motion";
+import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 
+import { authentication } from "@/services/firebase-config";
 function Auth() {
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [otp, setotp] = useState("");
+  const [signIn, setSignIn] = useState(false);
+  const generateRecaptcha = () => {
+    window.recaptchaVerifier = new RecaptchaVerifier(
+      "recaptcha",
+      {
+        // size: "invisible",
+        callback: (response) => {
+          console.log("3");
+          // reCAPTCHA solved, allow signInWithPhoneNumber.
+        },
+      },
+      authentication
+    );
+  };
+
+  const requestOTP = () => {
+    if (phoneNumber.length === 10) {
+      console.log("1");
+      generateRecaptcha();
+      console.log("4");
+      const appVerifier = window.recaptchaVerifier;
+      signInWithPhoneNumber(authentication, phoneNumber)
+        .then((confirmationResult) => {
+          // SMS sent. Prompt user to type the code from the message, then sign the
+          // user in with confirmationResult.confirm(code).
+          window.confirmationResult = confirmationResult;
+          // ...
+          console.log("OTP sent");
+          setSignIn(true);
+        })
+        .catch((error) => {
+          // Error; SMS not sent
+          // ...
+          console.log(error);
+        });
+    } else {
+      console.log("Enter a valid phone number");
+    }
+  };
+
+  const verifyOTP = (e) => {
+    confirmationResult
+      .confirm(otp)
+      .then((result) => {
+        // User signed in successfully.
+        const user = result.user;
+        // ...
+      })
+      .catch((error) => {
+        // User couldn't sign in (bad verification code?)
+        // ...
+      });
+  };
+
   return (
     <Fragment>
       <div className={styles.authBackground + " "}>
@@ -29,6 +87,7 @@ function Auth() {
             <div className={styles.lapUserInfo}>
               <Fragment>
                 <h1 className={styles.signInText}>Log In .</h1>
+                <div id="recaptcha"></div>
 
                 <div className={styles.Step1}>
                   {/* <input
@@ -41,10 +100,31 @@ function Auth() {
                     className={styles.nameInput}
                     placeholder="Phone"
                     type="number"
+                    onChange={(e) => setPhoneNumber(e.target.value)}
+                  />
+                  <input
+                    style={signIn ? { display: "block" } : { display: "none" }}
+                    className={styles.nameInput}
+                    placeholder="OTP"
+                    type="number"
+                    onChange={(e) => setotp(e.target.value)}
                   />
                   <br />
                 </div>
-                <div className={styles.signInButton + " "}>Sign In</div>
+                <div
+                  style={signIn ? { display: "none" } : { display: "block" }}
+                  className={styles.signInButton + " "}
+                  onClick={requestOTP}
+                >
+                  Sign In
+                </div>
+                <div
+                  style={signIn ? { display: "block" } : { display: "none" }}
+                  className={styles.signInButton + " "}
+                  onClick={verifyOTP}
+                >
+                  Verify
+                </div>
               </Fragment>
             </div>
           </div>

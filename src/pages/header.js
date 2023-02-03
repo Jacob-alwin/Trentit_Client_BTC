@@ -23,7 +23,6 @@ function Header() {
         height={43}
         priority
       />
-
       <motion.div
         animate={{ x: 0 }}
         initial={{ x: 550 }}
