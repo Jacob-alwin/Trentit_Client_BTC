@@ -1,13 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "@/styles/Header.module.scss";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 // import classNames from "classnames";
 // import notificationIcon from "../../images/Svg/Bell.svg";
 // import chatIcon from "../../images/Svg/Chat.svg";
 // import favIcon from "../../images/Svg/Fav.svg";
 function Header() {
   const [open, setopen] = useState(false);
+  useEffect(() => {
+    
+  
+    return () => {
+      setopen(false);
+    }
+  }, [])
+  
   return (
     <nav
       className={
@@ -15,48 +24,45 @@ function Header() {
         // styles.hideScrollDown
       }
     >
-      <Image
-        className={styles.logo}
-        src="/vercel.svg"
-        alt="13"
-        width={43}
-        height={43}
-        priority
-      />
+      <Link href="/">
+        <Image
+          className={styles.logo}
+          src="/vercel.svg"
+          alt="13"
+          width={43}
+          height={43}
+          priority
+        />
+      </Link>
       <motion.div
         animate={{ x: 0 }}
         initial={{ x: 550 }}
         transition={{ type: "just", duration: 1 }}
         className={styles.outerIcons + " d-flex hstack gap-5"}
       >
-        {/* <div className={styles.Location}>
-          <h4>lovvuvuvuv</h4>
-          <ul>
-            <li>Kottayam </li>
-            <li>Kochhi</li>
-            <li>Mumbai</li>
-          </ul>
-        </div> */}
-
         <div className={styles.search}>
           <input type="text" placeholder="Search..." />
           <motion.i className="bi bi-search pt-1 pt-1"></motion.i>
         </div>
 
         <div className={styles.icons + " d-flex "}>
-          <motion.i
-            animate={{ scale: 0.75 }}
-            whileHover={{ scale: 1, transition: { duration: 0.5 } }}
-            className="bi bi-heart"
-          />
-          <motion.i
-            animate={{ scale: 0.75 }}
-            whileHover={{
-              scale: 1,
-              transition: { duration: 0.5 },
-            }}
-            className="bi bi-cart2 mb-1"
-          />
+          {/* <Link href="/favourites">
+            <motion.i
+              animate={{ scale: 0.75 }}
+              whileHover={{ scale: 1, transition: { duration: 0.5 } }}
+              className="bi bi-heart"
+            />
+          </Link> */}
+          <Link href="/cart">
+            <motion.i
+              animate={{ scale: 0.75 }}
+              whileHover={{
+                scale: 1,
+                transition: { duration: 0.5 },
+              }}
+              className="bi bi-cart2 mb-1"
+            />
+          </Link>
 
           <motion.i
             onClick={() => {

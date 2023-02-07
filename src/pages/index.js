@@ -6,31 +6,19 @@ import Image from "next/image";
 import { useSelector } from "react-redux";
 import { dispatch } from "@/redux/store";
 import { addAmount } from "@/redux/reducers/cart";
-import { category } from "@/data/data";
-
-const responsive = {
-  desktop: {
-    breakpoint: { max: 3000, min: 1024 },
-    items: 3,
-    slidesToSlide: 3, // optional, default to 1.
-  },
-  tablet: {
-    breakpoint: { max: 1024, min: 464 },
-    items: 2,
-    slidesToSlide: 2, // optional, default to 1.
-  },
-  mobile: {
-    breakpoint: { max: 464, min: 0 },
-    items: 1,
-    slidesToSlide: 1, // optional, default to 1.
-  },
-};
+import { category, homedata } from "@/data/data";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { hello } from "@/services/hello";
 
 function home() {
-  const cart = useSelector((state) => state.cart);
-  function AddAmount() {
-    dispatch(addAmount({ num: 1003 }));
-  }
+  // const cart = useSelector((state) => state.cart);
+  // function AddAmount() {
+  //   dispatch(useaddAmount({ num: 1003 }));
+  // }
+
+  // const mydata = useQuery("mydata", () => hello());
+
+  // console.log(mydata);
 
   return (
     <Fragment>
@@ -45,7 +33,7 @@ function home() {
             <div className={styles.banner}>
               <h2 className="animate__animated animate__fadeInDown">
                 Buy your pre-owned product with
-                <span onClick={AddAmount}>{cart.totalAmount}...</span>
+                {/* <span onClick={AddAmount}>{cart.totalAmount}...</span> */}
               </h2>
               <h5 className="animate__animated animate__fadeInUp">
                 Trentit directly verify each product with many quality check and
@@ -62,7 +50,7 @@ function home() {
         <div className="scrollChanger"></div>
 
         <motion.div className={styles.categorysection}>
-          <motion.div className={styles.category + " "}>
+          {/* <motion.div className={styles.category + " "}>
             <div
               className={
                 styles.categoryContainer + " d-flex justify-content-around "
@@ -71,6 +59,7 @@ function home() {
               {category.map((data, index) => {
                 return (
                   <motion.div
+                    key={index}
                     onClick={() => {
                       // handleClick(data.category.name);
                     }}
@@ -90,110 +79,104 @@ function home() {
                 );
               })}
             </div>
-          </motion.div>
+          </motion.div> */}
 
           <div className={styles.categoryTile}>
             <div className={styles.categoryParallaxContainer}>
               {/* <div className={styles.freeSpace}></div> */}
-              <div className={styles.categoryTileContainer + " my-5"}>
-                <div className={" p-3 "}>
+              {homedata.map((data, index) => {
+                return (
                   <div
-                    className={styles.title + " d-flex justify-content-between"}
+                    key={index}
+                    className={styles.categoryTileContainer + " my-5"}
                   >
-                    <div className="categoryTitle hstack gap-3">
-                      <h4>Phone</h4>
-                      <div className={styles.exploreMore + " hstack gap-2"}>
-                        <h6>Explore More </h6>
-                      </div>
-                    </div>
+                    <div className={" p-3 "}>
+                      <div
+                        className={
+                          styles.title + " d-flex justify-content-between"
+                        }
+                      >
+                        <div className="categoryTitle hstack gap-3">
+                          <h4>{data.category}</h4>
+                          <div className={styles.exploreMore + " hstack gap-2"}>
+                            <h6>Explore More </h6>
+                          </div>
+                        </div>
 
-                    <Image
-                      src="/vercel.svg"
-                      alt="13"
-                      width={43}
-                      height={43}
-                      priority
-                    />
-                  </div>
-                  <Carousel
-                    additionalTransfrom={0}
-                    arrows
-                    autoPlaySpeed={3000}
-                    centerMode={false}
-                    className="d-flex"
-                    containerClass="carousel-container"
-                    dotListClass=""
-                    draggable
-                    focusOnSelect={false}
-                    infinite={false}
-                    itemClass=""
-                    keyBoardControl
-                    responsive={responsive}
-                    minimumTouchDrag={80}
-                    pauseOnHover
-                    renderArrowsWhenDisabled={false}
-                    renderButtonGroupOutside={false}
-                    renderDotsOutside={false}
-                    rewind={false}
-                    rewindWithAnimation={false}
-                    rtl={false}
-                    shouldResetAutoplay
-                    // showDots={false}
-                    sliderClass=""
-                    slidesToSlide={1}
-                    swipeable
-                  >
-                    <motion.div
-                      style={{
-                        // tr
-                        ansform: "translateY(200px)",
-                        opacity: 1,
-                        transition: "all 0.5s ",
-                      }}
-                      className={styles.cardBody + " vstack gap-2"}
-                    >
-                      <div className={styles.Image}>
                         <Image
-                          src="/thirteen.svg"
-                          alt="13"
-                          width={100}
-                          height={101}
+                          src={data.image}
+                          alt=" "
+                          width={43}
+                          height={43}
                           priority
                         />
-                        {/* <div className={styles.cityText + " p-2 m-1"}>
-                            City
-                          </div> */}
-                        {/* <motion.div
-                              whileHover={{ scale: 1.3 }}
-                              className={styles.favourite + " hstack m-2 "}
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                // updateFavouriteService(data._id);
-                                // setisFavourite(!isFavourite);
-                              }}
-                            >
-                              <i
-                                key={index}
-                                className={
-                                  isFavourite
-                                    ? "bi bi-heart-fill"
-                                    : "bi bi-heart"
-                                }
-                              ></i>
-                            </motion.div> */}
-                        {/* {data.isFeatured ?? false ? ( */}
-                        <div className={styles.featured + " p-2"}>Open Box</div>
                       </div>
-                      <div className={styles.Price}>
-                        <h4 className={styles.priceText}>Iphone</h4>
-                        {/* <h4 className={styles.dateText}>2\2\2222</h4> */}
-                      </div>
-                    </motion.div>
-                  </Carousel>
-                </div>
-              </div>
-              {/* );
-              })} */}
+                      {data.products.map((items, index) => {
+                        return (
+                          <motion.div
+                            key={index}
+                            style={{
+                              // tr
+                              ansform: "translateY(200px)",
+                              opacity: 1,
+                              transition: "all 0.5s ",
+                            }}
+                            className={styles.cardBody + " vstack gap-2"}
+                          >
+                            <div className={styles.Image}>
+                              <Image
+                                src={items.image}
+                                alt="13"
+                                width={100}
+                                height={101}
+                                priority
+                              />
+                              <div className={styles.cityText + " p-2  "}>
+                                {Math.floor(
+                                  ((items.orgPrice - items.price) /
+                                    items.orgPrice) *
+                                    100
+                                )}
+                                <span>% off</span>
+                              </div>
+                              <motion.div
+                                // whileHover={{ scale: 1.3 }}
+                                className={styles.favourite + " hstack m-2 "}
+                                onClick={(e) => {
+                                  // e.stopPropagation();
+                                  // updateFavouriteService(data._id);
+                                  // setisFavourite(!isFavourite);
+                                }}
+                              >
+                                <i
+                                  key={index}
+                                  className={
+                                    // isFavourite
+                                    // ? "bi bi-heart-fill"
+                                    // :
+                                    "bi bi-cart-plus"
+                                  }
+                                ></i>
+                              </motion.div>
+                              <div className={styles.featured + " p-2"}>
+                                Open Box
+                              </div>
+                            </div>
+                            <div className={styles.Price}>
+                              <h4 className={styles.priceText}>{items.name}</h4>
+                              <h4 className={styles.dateText}>
+                                {items.price}
+                                <br />
+                                <del>{items.orgPrice}</del>
+                              </h4>
+                            </div>
+                          </motion.div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </motion.div>

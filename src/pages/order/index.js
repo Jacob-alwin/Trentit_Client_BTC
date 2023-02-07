@@ -31,7 +31,7 @@ function Cart() {
                 <div key={index}>
                   {ordertype.map((data, typeindex) => {
                     return (
-                      <div className={styles.OrderDetails} key={typeindex}>
+                      <div key={typeindex} className={styles.OrderDetails}>
                         <div className="d-flex justify-content-between  ">
                           <dl>
                             <dt>Order ID- {data.id}</dt>
@@ -63,7 +63,7 @@ function Cart() {
                         <h5>Your Order</h5>
                         {data.products.map((product, index) => {
                           return (
-                            <ul>
+                            <ul key={index}>
                               <li className="d-flex justify-content-between mb-2 ">
                                 <div className="d-flex justify-content-between ">
                                   <Image

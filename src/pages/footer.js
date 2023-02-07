@@ -50,7 +50,7 @@ function Footer() {
 
             <div className={styles.content}>
               <motion.h6 whileHover={{ scale: 1.05 }}>Contact Us</motion.h6>
-              <motion.h6 whileHover={{ scale: 1.05 }}>FAQ's</motion.h6>
+              <motion.h6 whileHover={{ scale: 1.05 }}>FAQ&apos;s</motion.h6>
               <motion.h6 whileHover={{ scale: 1.05 }}>
                 Terms & Conditions
               </motion.h6>

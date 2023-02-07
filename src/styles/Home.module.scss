@@ -434,7 +434,7 @@
     height: 100%;
 
     background: chartreuse;
-    border-radius: 2vw;
+    // border-radius: 10px;
     filter: drop-shadow(0px 0px 0px rgba(112, 112, 112, 0.123));
     background-color: $transparent-background-light;
     // background: #3e379a;
@@ -448,7 +448,6 @@
         -ms-transition: all 500ms ease-in-out;
         -o-transition: all 500ms ease-in-out;
         transition: all 500ms ease-in-out;
-        font-size: 1vw;
         cursor: pointer;
 
         &:hover {
@@ -461,13 +460,13 @@
       h6 {
         margin-bottom: 5px;
         font-weight: 400;
-        font-size: 1.5vw;
+        font-size: 15px;
       }
 
       h4 {
         font-weight: 300;
-        font-size: 2.5vw;
-        letter-spacing: 0.27em;
+        font-size: 23px;
+        letter-spacing: 2px;
         cursor: pointer;
 
         &:hover + .exploreMore {
@@ -478,34 +477,40 @@
     }
 
     .cardBody {
-      width: 90%;
-      height: 90%;
-      border-radius: 1vw;
+      width: 250px;
+      height: 250px;
+      border-radius: 10px;
       cursor: pointer;
-
       .Image {
         height: 90%;
-        font-size: 1vw;
+        // font-size: 1vw;
         border-radius: 1vw;
         box-shadow: 0px 2.31023px 3.08031px rgba(0, 0, 0, 0.25);
         position: relative;
 
         img {
           // background-color: #3e379a;
-          border-radius: 1vw;
+          border-radius: 20px;
           width: 100%;
           height: 100%;
-          object-fit: cover;
+          // padding: ;
+          object-fit: contain;
         }
 
         .cityText {
           position: absolute;
           top: 0;
-          font-size: 1.1vw;
-          background: $transparent-background-dark;
+          left: 0;
+          padding: 0rem;
+          font-size: 15px;
+
+          background: $teritary;
           border-radius: 0.5rem;
-          font-weight: 400;
+          font-weight: 600;
           color: $secondary;
+          span {
+            font-size: 12px;
+          }
         }
 
         .favourite {
@@ -514,58 +519,71 @@
           right: 0;
           background: $transparent-background-light;
           border-radius: 15%;
-          width: 2.2vw;
-          height: 2.2vw;
+          width: 28px;
+          height: 28px;
           // align-items: center;
           text-align: center;
           justify-content: center;
           cursor: pointer;
 
           i {
-            font-size: 1vw;
+            font-size: 25px;
           }
         }
 
         .featured {
           position: absolute;
           bottom: 0;
-          font-size: 1vw;
+          font-size: 15px;
           background: $transparent-background-dark;
           border-top-right-radius: 20px;
-          border-bottom-left-radius: 7px;
+          border-bottom-left-radius: 4px;
           font-weight: 400;
           color: $secondary;
         }
       }
 
       .Price {
-        padding: 1vw;
+        padding: 5px;
         // margin-bottom: .2rem;
         // background-color: $transparent-background-light;
         align-items: center;
         display: flex;
         justify-content: space-between;
         // box-shadow: 0px 2.31023px 3.08031px rgba(0, 0, 0, 0.25);
-        border-radius: 1vw;
+        border-radius: 10px;
         transition: all ease 0.2s;
 
         .priceText {
           // font-weight: 400;
-          font-size: 1.5vw;
+          font-size: 12px;
           opacity: 0.8;
+          width: 150px;
         }
 
         .dateText {
+          text-align: end;
           font-weight: 400;
-          font-size: 1vw;
+          font-size: 20px;
           opacity: 0.6;
+          font-weight: 800;
+          color: $quationarydark;
+          del {
+            color: gray;
+          }
         }
       }
 
       &:hover > .Price {
-        background-color: $transparent-background-dark;
-        color: $secondary;
+        background-color: $transparent-background-light;
+        color: $quationarydark;
         transition: all ease 0.2s;
+        .dateText {
+          color: rgb(51, 212, 51);
+          del {
+            color: $transparent-background-dark;
+          }
+        }
       }
     }
   }

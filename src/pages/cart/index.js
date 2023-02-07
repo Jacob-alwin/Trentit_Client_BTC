@@ -14,7 +14,6 @@ function Cart() {
   function AddAmount() {
     dispatch(addAmount({ num: 1003 }));
   }
-  
 
   // const [rating, setRating] = useState(0);
   // // Catch Rating value
@@ -48,8 +47,8 @@ function Cart() {
                       <dt>{data.products.length} Item(s) Order Placed</dt>
                     </dl> */}
 
-                <button className="bg-primary" type="">
-                  Cart
+                <button className="bg-success" type="">
+                  Order
                 </button>
               </div>
 

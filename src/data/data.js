@@ -130,6 +130,41 @@ export const products = [
   },
 ];
 
+export const homedata = [
+  {
+    category: "Phone",
+    image: "/vercel.svg",
+    products: [
+      {
+        id: 1,
+        name: "Apple iPhone 12 Pro Max (Pacific Blue, 128 GB)",
+        image: "/vercel.svg",
+        description:
+          "Apple iPhone 12 Pro Max (Pacific Blue, 128 GB) (6 GB RAM)",
+        reviews: 1000,
+        price: 79900,
+        orgPrice: 129900,
+      },
+    ],
+  },
+  {
+    category: "Life Style",
+    image: "/vercel.svg",
+    products: [
+      {
+        id: 1,
+        name: "Apple iPhone 12  (Pacific Blue, 128 GB)",
+        image: "/vercel.svg",
+        description:
+          "Apple iPhone 12 Pro Max (Pacific Blue, 128 GB) (6 GB RAM)",
+        reviews: 1000,
+        price: 79900,
+        orgPrice: 129900,
+      },
+    ],
+  },
+];
+
 export const cart = [
   {
     id: 1,
