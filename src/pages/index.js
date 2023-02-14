@@ -5,20 +5,43 @@ import Carousel from "react-multi-carousel";
 import Image from "next/image";
 import { useSelector } from "react-redux";
 import { dispatch } from "@/redux/store";
-import { addAmount } from "@/redux/reducers/cart";
+import { addAmount, newItem } from "@/redux/reducers/cart";
 import { category, homedata } from "@/data/data";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { hello } from "@/services/hello";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+// import { homedata } from "@/services/common";
+import Link from "next/link";
+import { AddCart } from "@/services/cart";
 
-function home() {
-  // const cart = useSelector((state) => state.cart);
-  // function AddAmount() {
-  //   dispatch(useaddAmount({ num: 1003 }));
-  // }
+function Home() {
+  const cart = useSelector((state) => state.cart);
+  function AddAmount() {
+    dispatch(addAmount({ num: 1003 }));
+  }
+
+  const queryClient = useQueryClient();
+
+  const productsData = useQuery({
+    queryKey: ["productsData"],
+    queryFn: () => homedata(),
+  });
+
+  const cartMutation = useMutation((product_id) => AddCart(product_id), {
+    onSuccess: (data) => {
+      if (data.success) queryClient.invalidateQueries("cartData");
+      else alert(data.message);
+    },
+  });
 
   // const mydata = useQuery("mydata", () => hello());
 
-  // console.log(mydata);
+  //using useQuery to fetch data from server and store in mydata from hello.js
+  // const mydata = useQuery("mydata", () => hello());
+
+  // data from hello.js
+
+  //  const mydata = useQuery("mydata", () => hello())
+
+  // console.log("mydata", productsData.data);
 
   return (
     <Fragment>
@@ -33,7 +56,7 @@ function home() {
             <div className={styles.banner}>
               <h2 className="animate__animated animate__fadeInDown">
                 Buy your pre-owned product with
-                {/* <span onClick={AddAmount}>{cart.totalAmount}...</span> */}
+                <span onClick={AddAmount}>{cart.totalAmount}...</span>
               </h2>
               <h5 className="animate__animated animate__fadeInUp">
                 Trentit directly verify each product with many quality check and
@@ -50,7 +73,7 @@ function home() {
         <div className="scrollChanger"></div>
 
         <motion.div className={styles.categorysection}>
-          {/* <motion.div className={styles.category + " "}>
+          <motion.div className={styles.category + " "}>
             <div
               className={
                 styles.categoryContainer + " d-flex justify-content-around "
@@ -79,7 +102,7 @@ function home() {
                 );
               })}
             </div>
-          </motion.div> */}
+          </motion.div>
 
           <div className={styles.categoryTile}>
             <div className={styles.categoryParallaxContainer}>
@@ -123,45 +146,46 @@ function home() {
                             }}
                             className={styles.cardBody + " vstack gap-2"}
                           >
-                            <div className={styles.Image}>
-                              <Image
-                                src={items.image}
-                                alt="13"
-                                width={100}
-                                height={101}
-                                priority
-                              />
-                              <div className={styles.cityText + " p-2  "}>
-                                {Math.floor(
-                                  ((items.orgPrice - items.price) /
-                                    items.orgPrice) *
-                                    100
-                                )}
-                                <span>% off</span>
+                            <Link href={`/details/${items._id}`}>
+                              <div className={styles.Image}>
+                                <Image
+                                  src={items.image}
+                                  alt="13"
+                                  width={100}
+                                  height={101}
+                                  priority
+                                />
+                                <div className={styles.cityText + " p-2  "}>
+                                  {Math.floor(
+                                    ((items.orgPrice - items.price) /
+                                      items.orgPrice) *
+                                      100
+                                  )}
+                                  <span>% off</span>
+                                </div>
+                                <motion.div
+                                  // whileHover={{ scale: 1.3 }}
+                                  className={styles.favourite + " hstack m-2 "}
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    cartMutation.mutate(items._id);
+                                  }}
+                                >
+                                  <i
+                                    key={index}
+                                    className={
+                                      // isFavourite
+                                      // ? "bi bi-heart-fill"
+                                      // :
+                                      "bi bi-cart-plus"
+                                    }
+                                  ></i>
+                                </motion.div>
+                                <div className={styles.featured + " p-2"}>
+                                  Open Box
+                                </div>
                               </div>
-                              <motion.div
-                                // whileHover={{ scale: 1.3 }}
-                                className={styles.favourite + " hstack m-2 "}
-                                onClick={(e) => {
-                                  // e.stopPropagation();
-                                  // updateFavouriteService(data._id);
-                                  // setisFavourite(!isFavourite);
-                                }}
-                              >
-                                <i
-                                  key={index}
-                                  className={
-                                    // isFavourite
-                                    // ? "bi bi-heart-fill"
-                                    // :
-                                    "bi bi-cart-plus"
-                                  }
-                                ></i>
-                              </motion.div>
-                              <div className={styles.featured + " p-2"}>
-                                Open Box
-                              </div>
-                            </div>
+                            </Link>
                             <div className={styles.Price}>
                               <h4 className={styles.priceText}>{items.name}</h4>
                               <h4 className={styles.dateText}>
@@ -185,7 +209,7 @@ function home() {
   );
 }
 
-export default home;
+export default Home;
 
 // import Head from "next/head";
 // import Image from "next/image";

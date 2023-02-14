@@ -1,6 +1,8 @@
 import React, { Fragment, useState } from "react";
 import styles from "@/styles/Details.module.scss";
 import { motion } from "framer-motion";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { AddCart } from "@/services/cart";
 // import Carousel3d from "../../../common/Carousel3d";
 // import RS from "../../images/Svg/Rs.svg";
 
@@ -55,6 +57,14 @@ const data = {
     __v: 2,
   },
 };
+const queryClient = useQueryClient();
+
+const cartMutation = useMutation((product_id) => AddCart(product_id), {
+  onSuccess: (data) => {
+    if (data.success) queryClient.invalidateQueries("cartData");
+    else alert(data.message);
+  },
+});
 
 function Details() {
   const [available, setAvailable] = useState(0);
@@ -122,9 +132,9 @@ function Details() {
                 ></motion.i>
               </motion.div>
             </div>
-            <div className={styles.SellerInfo}>
+            {/* <div className={styles.SellerInfo}>
               <button className="btn btn-primary">Location in map</button>
-            </div>
+            </div> */}
             <div className={styles.SellerInfo}>
               <h2>Love</h2>
               {/* <div className={styles.SellerMessage}>
@@ -144,7 +154,9 @@ function Details() {
                   <h2>Post your Ad for free</h2>
                 </div>
 
-                <button>
+                <button onClick={()=>{
+                  cartMutation.mutate(data.data._id)
+                }} >
                   <span></span>
 
                   {/* <img src={RS} alt="RS" /> */}

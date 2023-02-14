@@ -10,13 +10,11 @@ import Link from "next/link";
 function Header() {
   const [open, setopen] = useState(false);
   useEffect(() => {
-    
-  
     return () => {
       setopen(false);
-    }
-  }, [])
-  
+    };
+  }, []);
+
   return (
     <nav
       className={

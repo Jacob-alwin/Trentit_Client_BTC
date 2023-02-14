@@ -5,6 +5,8 @@ import { cart } from "@/data/data";
 import { useSelector } from "react-redux";
 import { dispatch } from "@/redux/store";
 import { addAmount } from "@/redux/reducers/cart";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { DecrementCartItem, GetCart, IncrementCartItem } from "@/services/cart";
 
 // import goatmeat from "../images/populate/goatmeat.png";
 // import { Rating } from "react-simple-star-rating";
@@ -14,6 +16,64 @@ function Cart() {
   function AddAmount() {
     dispatch(addAmount({ num: 1003 }));
   }
+
+  // Add iteems to cart
+  const [cart, setCart] = useState([]);
+
+  const addToCart = (product) => {
+    const exist = cart.find((x) => x.id === product.id);
+    if (exist) {
+      setCart(
+        cart.map((x) =>
+          x.id === product.id ? { ...exist, qty: exist.qty + 1 } : x
+        )
+      );
+    } else {
+      setCart([...cart, { ...product, qty: 1 }]);
+    }
+  };
+
+  // Remove items from cart
+  const removeFromCart = (product) => {
+    const exist = cart.find((x) => x.id === product.id);
+    if (exist.qty === 1) {
+      setCart(cart.filter((x) => x.id !== product.id));
+    } else {
+      setCart(
+        cart.map((x) =>
+          x.id === product.id ? { ...exist, qty: exist.qty - 1 } : x
+        )
+      );
+    }
+  };
+
+  const queryClient = useQueryClient();
+  const cartData = useQuery({
+    queryKey: ["cartData"],
+    queryFn: () => GetCart(),
+  });
+
+  const IncrementMutation = useMutation(
+    (product_id) => IncrementCartItem(product_id),
+    {
+      onSuccess: (data) => {
+        if (data.success) {
+          // #TODO: update cart data
+        } else alert(data.message);
+      },
+    }
+  );
+
+  const DecrementMutation = useMutation(
+    (product_id) => DecrementCartItem(product_id),
+    {
+      onSuccess: (data) => {
+        if (data.success) {
+          // #TODO: update cart data
+        } else alert(data.message);
+      },
+    }
+  );
 
   // const [rating, setRating] = useState(0);
   // // Catch Rating value
@@ -85,7 +145,25 @@ function Cart() {
                           <b>{product.price}</b>
                         </div>
                       </div>
-                      <span>Qty-{product.quantity}</span>
+                      <div>
+                        {" "}
+                        <span
+                          onClick={() => {
+                            IncrementMutation.mutate(product._id);
+                          }}
+                        >
+                          +
+                        </span>{" "}
+                        Qty-{product.quantity}{" "}
+                        <span
+                          onClick={() => {
+                            if (product.quantity > 1)
+                              DecrementMutation.mutate(product._id);
+                          }}
+                        >
+                          -
+                        </span>{" "}
+                      </div>
                     </li>
                   );
                 })}

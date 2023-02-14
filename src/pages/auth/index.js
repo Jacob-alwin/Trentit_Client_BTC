@@ -8,6 +8,22 @@ function Auth() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [otp, setotp] = useState("");
   const [signIn, setSignIn] = useState(false);
+
+ const queryClient = useQueryClient();
+
+  const product = useQuery("productsData", () => homedata(), {
+    onSuccess: (data) => {
+      console.log("data", data);
+    },
+  });
+
+  //mutation to post data to server
+  const mutation = useMutation((data) => postdata(data), {
+    onSuccess: (data) => {
+      console.log("data", data);
+    },
+  });
+
   const generateRecaptcha = () => {};
 
   const requestOTP = () => {
@@ -56,6 +72,10 @@ function Auth() {
         const user = result.user;
         console.log("Logged in");
         console.log(user);
+        mutation.mutate(user);
+
+        // usequery to post data to server
+
         // ...
       })
       .catch((error) => {
