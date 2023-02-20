@@ -1,8 +1,10 @@
 import React, { Fragment, useState } from "react";
 import styles from "@/styles/Details.module.scss";
 import { motion } from "framer-motion";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { AddCart } from "@/services/cart";
+import { useRouter } from "next/router";
+import { productdetails } from "@/services/product";
 // import Carousel3d from "../../../common/Carousel3d";
 // import RS from "../../images/Svg/Rs.svg";
 
@@ -57,17 +59,27 @@ const data = {
     __v: 2,
   },
 };
-const queryClient = useQueryClient();
-
-const cartMutation = useMutation((product_id) => AddCart(product_id), {
-  onSuccess: (data) => {
-    if (data.success) queryClient.invalidateQueries("cartData");
-    else alert(data.message);
-  },
-});
 
 function Details() {
+  const router = useRouter();
+  const { id } = router.query;
   const [available, setAvailable] = useState(0);
+  const [loading, setLoading] = useState(false);
+
+  const queryClient = useQueryClient();
+
+  const cartMutation = useMutation((product_id) => AddCart(product_id), {
+    onSuccess: (data) => {
+      if (data.success) queryClient.invalidateQueries("cartData");
+      else alert(data.message);
+    },
+  });
+
+  const detailsData = useQuery({
+    queryKey: ["detailsData", id],
+    queryFn: () => productdetails(id),
+    enabled: !!id,
+  });
 
   function handleAdd() {
     if (available < data.data.quantity) {
@@ -77,67 +89,78 @@ function Details() {
       alert("Limted Stock");
     }
   }
+
   return (
     <Fragment>
-      <div className={styles.LapDetails}>
-        {/* <Carousel3d /> */}
-        <div className={styles.Container + " d-flex justify-content-between"}>
-          <div className={styles.Slide}>
-            <div className={styles.ShortDes + " "}>
-              <p>{data.data.information}</p>
-            </div>
-            <div className={styles.LongDes}>
-              <div className={styles.Configurations}>
-                <h1>General Information</h1>
-                <ul>
-                  {data.data.specifications.map((spec, index) => {
-                    return (
-                      <li
-                        key={index}
-                        className="d-flex justify-content-between m-2"
-                      >
-                        <h2>{spec.key}</h2>
-                        <h2>{spec.value}</h2>
-                      </li>
-                    );
-                  })}
-                </ul>
+      {detailsData.isLoading ? (
+        <h1>Loading..</h1>
+      ) : detailsData.isError ? (
+        <h1>Error..</h1>
+      ) : (
+        detailsData.data && (
+          <div className={styles.LapDetails}>
+            {/* <Carousel3d /> */}
+            <div
+              className={styles.Container + " d-flex justify-content-between"}
+            >
+              <div className={styles.Slide}>
+                <div className={styles.ShortDes + " "}>
+                  <p>{detailsData.data.data.information}</p>
+                </div>
+                <div className={styles.LongDes}>
+                  <div className={styles.Configurations}>
+                    <h1>General Information</h1>
+                    <ul>
+                      {detailsData.data.data.specifications.map(
+                        (spec, index) => {
+                          return (
+                            <li
+                              key={index}
+                              className="d-flex justify-content-between m-2"
+                            >
+                              <h2>{spec.key}</h2>
+                              <h2>{spec.value}</h2>
+                            </li>
+                          );
+                        }
+                      )}
+                    </ul>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          <div className={styles.Details + " "}>
-            <div className={styles.ShortInfo}>
-              <h1>{data.data.name}</h1>
+              <div className={styles.Details + " "}>
+                <div className={styles.ShortInfo}>
+                  <h1>{detailsData.data.data.name}</h1>
 
-              <h4>
-                <span onClick={() => handleAdd()}>+</span>
-                {available}
-                <span>-</span>
+                  <h4>
+                    {/* <span onClick={() => handleAdd()}>+</span>
+                    {available}
+                    <span>-</span> */}
 
-                {/* <p>Auction Date</p> */}
-              </h4>
-              <li>
-                <h2>{data.data.grade}</h2>
-              </li>
-              <h5>
-                <del>₹ {data.data.originalPrice}</del>
-              </h5>
-              <h5>₹ {data.data.purchasePrice}</h5>
+                    {/* <p>Auction Date</p> */}
+                  </h4>
+                  <li>
+                    <h2>{detailsData.data.data.grade}</h2>
+                  </li>
+                  <h5>
+                    <del>₹ {detailsData.data.data.originalPrice}</del>
+                  </h5>
+                  <h5>₹ {detailsData.data.data.purchasePrice}</h5>
 
-              <motion.div className={styles.favourite + " d-flex m-2 "}>
-                <motion.i
-                  whileHover={{ scale: 1.2 }}
-                  //   className={fav ? "bi bi-heart-fill" : "bi bi-heart"}
-                  className={"bi bi-heart"}
-                ></motion.i>
-              </motion.div>
-            </div>
-            {/* <div className={styles.SellerInfo}>
+                  <motion.div className={styles.favourite + " d-flex m-2 "}>
+                    <motion.i
+                      whileHover={{ scale: 1.2 }}
+                      //   className={fav ? "bi bi-heart-fill" : "bi bi-heart"}
+                      className={"bi bi-cart-plus"}
+                    ></motion.i>
+                  </motion.div>
+                </div>
+                {/* <div className={styles.SellerInfo}>
               <button className="btn btn-primary">Location in map</button>
             </div> */}
-            <div className={styles.SellerInfo}>
-              <h2>Love</h2>
-              {/* <div className={styles.SellerMessage}>
+                <div className={styles.SellerInfo}>
+                  <h2>Love</h2>
+                  {/* <div className={styles.SellerMessage}>
                 <input type="hidden" name="userId" value={data.createdBy._id} />
                 <input type="text" placeholder="Message.." ref={chatMessage} />
                 <i
@@ -147,27 +170,29 @@ function Details() {
                   }}
                 ></i>
               </div> */}
-            </div>
-            <div className={styles.bottomBanner}>
-              <div className={styles.sellBanner}>
-                <div>
-                  <h2>Post your Ad for free</h2>
                 </div>
+                <div className={styles.bottomBanner}>
+                  <div className={styles.sellBanner}>
+                    <div>
+                      <h2>Post your Ad for free</h2>
+                    </div>
 
-                <button onClick={()=>{
-                  cartMutation.mutate(data.data._id)
-                }} >
-                  <span></span>
+                    <button
+                      onClick={() => {
+                        cartMutation.mutate(detailsData.data.data._id);
+                      }}
+                    >
+                      <span></span>
 
-                  {/* <img src={RS} alt="RS" /> */}
-                  <h5>Sell</h5>
-                </button>
+                      {/* <img src={RS} alt="RS" /> */}
+                      <h5>Sell</h5>
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
 
-        {/* <div className={styles.RelatedAds}>
+            {/* <div className={styles.RelatedAds}>
           <Carousel
             className={styles.carousel}
           >
@@ -183,7 +208,9 @@ function Details() {
           </Carousel>
          
         </div> */}
-      </div>
+          </div>
+        )
+      )}
     </Fragment>
   );
 }

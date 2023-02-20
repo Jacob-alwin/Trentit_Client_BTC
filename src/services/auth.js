@@ -5,11 +5,11 @@ import { dispatch } from "@/redux/store";
 
 export const signin = async (data) => {
   try {
-    const response = await httpClient().post(ApiEndpoints.signin, data);
+    const response = await httpClient().post(ApiEndpoints.signup, data);
     if (response.status > 201 || !response.data.success) {
       throw new Error(response.data.message);
     }
-    localStorage.setItem(LocalStorageKeys.userToken,response.data.token)
+    localStorage.setItem(LocalStorageKeys.userToken, response.data.token);
     return response.data;
   } catch (error) {
     dispatch(setErrorMessage(error.message));
@@ -42,5 +42,3 @@ export const updateProfile = async (data) => {
     return false;
   }
 };
-
-

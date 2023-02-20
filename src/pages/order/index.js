@@ -4,8 +4,9 @@ import Image from "next/image";
 // import goatmeat from "../images/populate/goatmeat.png";
 // import { Rating } from "react-simple-star-rating";
 import { activeorder, completedorder, cancelledorder } from "@/data/data";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
-function Cart() {
+function Order() {
   // const [rating, setRating] = useState(0);
 
   // // Catch Rating value
@@ -20,6 +21,12 @@ function Cart() {
   // const onPointerMove = (value: number, index: number) =>
   //   console.log(value, index);
   const order = [activeorder, completedorder, cancelledorder];
+
+  const queryClient = useQueryClient();
+  const cartData = useQuery({
+    queryKey: ["orderData"],
+    queryFn: () => GetCart(),
+  });
 
   return (
     <Fragment>
@@ -126,4 +133,4 @@ function Cart() {
   );
 }
 
-export default Cart;
+export default Order;

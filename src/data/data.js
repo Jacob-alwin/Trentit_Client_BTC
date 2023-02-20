@@ -4,25 +4,18 @@ export const category = [
     icon: "thirteen.svg",
   },
   {
-    name: "Phone",
+    name: "Laptop",
     icon: "thirteen.svg",
   },
   {
-    name: "Phone",
+    name: "Tablet",
     icon: "thirteen.svg",
   },
   {
-    name: "Phone",
+    name: "Camera",
     icon: "thirteen.svg",
   },
-  {
-    name: "Phone",
-    icon: "thirteen.svg",
-  },
-  {
-    name: "Phone",
-    icon: "thirteen.svg",
-  },
+
 ];
 
 export const products = [

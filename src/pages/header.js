@@ -1,20 +1,34 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styles from "@/styles/Header.module.scss";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { LocalStorageKeys } from "@/core/localStorageKeys";
+import { useRouter } from "next/router";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { allproducts } from "@/services/product";
+
 // import classNames from "classnames";
 // import notificationIcon from "../../images/Svg/Bell.svg";
 // import chatIcon from "../../images/Svg/Chat.svg";
 // import favIcon from "../../images/Svg/Fav.svg";
 function Header() {
   const [open, setopen] = useState(false);
+
+  const searchKey = useRef(null);
   useEffect(() => {
     return () => {
       setopen(false);
     };
   }, []);
+  const queryClient = useQueryClient();
 
+  // const product = useQuery({
+  //   queryKey: ["productsData", query],
+  //   queryFn: () => allproducts(query),
+  // });
+
+  const router = useRouter();
   return (
     <nav
       className={
@@ -39,8 +53,15 @@ function Header() {
         className={styles.outerIcons + " d-flex hstack gap-5"}
       >
         <div className={styles.search}>
-          <input type="text" placeholder="Search..." />
-          <motion.i className="bi bi-search pt-1 pt-1"></motion.i>
+          <input ref={searchKey} type="text" placeholder="Search..." />
+          <motion.i
+            onClick={() => {
+              searchKey.current.value
+                ? router.push("/search/" + searchKey.current.value)
+                : router.push("/list");
+            }}
+            className="bi bi-search pt-1 pt-1"
+          ></motion.i>
         </div>
 
         <div className={styles.icons + " d-flex "}>
@@ -88,16 +109,35 @@ function Header() {
             <h5>789 351 5412</h5>
           </div>
           <div>
-            <h5>My Orders</h5>
-            <h5>{">"}</h5>
+            <Link
+              href="/order"
+              style={{
+                textDecoration: "none",
+                width: "30vw",
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
+              <h5>My Orders</h5>
+              <h5>{">"}</h5>
+            </Link>
           </div>
           <div>
             <h5>Address</h5>
+
             <h5>edit</h5>
           </div>
           <div>
             <h5>Logout</h5>
-            <h5>icon</h5>
+
+            <h5
+              onClick={() => {
+                localStorage.removeItem(LocalStorageKeys.userToken);
+                router.push("/auth");
+              }}
+            >
+              icon
+            </h5>
           </div>
         </div>
       </motion.div>

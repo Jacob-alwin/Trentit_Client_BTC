@@ -5,7 +5,7 @@ import { cart } from "@/data/data";
 import { useSelector } from "react-redux";
 import { dispatch } from "@/redux/store";
 import { addAmount } from "@/redux/reducers/cart";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { DecrementCartItem, GetCart, IncrementCartItem } from "@/services/cart";
 
 // import goatmeat from "../images/populate/goatmeat.png";
@@ -51,7 +51,16 @@ function Cart() {
   const cartData = useQuery({
     queryKey: ["cartData"],
     queryFn: () => GetCart(),
+    onSuccess: (data) => {
+      if (data.success) {
+        dispatch(AddAmount(data.data));
+      } else alert(data.message);
+    },
   });
+
+  // useEffect(() => {
+
+  // }, [cartData.data]);
 
   const IncrementMutation = useMutation(
     (product_id) => IncrementCartItem(product_id),

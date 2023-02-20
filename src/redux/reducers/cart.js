@@ -24,8 +24,32 @@ const cartInitState = {
       brand: "Apple",
       color: "Blue",
     },
+
+    {
+      id: 2,
+      name: "Apple iPhone 12 Pro Max (Pacific Blue, 128 GB)",
+      orgprice: 129900,
+      price: 700000,
+      quantity: 1,
+      image: "thirteen.svg",
+      description: "Apple iPhone 12 Pro Max (Pacific Blue, 128 GB) (6 GB RAM)",
+      brand: "Apple",
+      color: "Blue",
+    },
+    {
+      id: 2,
+      name: "Apple iPhone 12 Pro Max (Pacific Blue, 128 GB)",
+      orgprice: 129900,
+      price: 700000,
+      quantity: 1,
+      image: "thirteen.svg",
+      description: "Apple iPhone 12 Pro Max (Pacific Blue, 128 GB) (6 GB RAM)",
+      brand: "Apple",
+      color: "Blue",
+    },
   ],
   totalAmount: 30000,
+  totalCount: 0,
 };
 
 const cartSlice = createSlice({
@@ -33,7 +57,12 @@ const cartSlice = createSlice({
   initialState: cartInitState,
   reducers: {
     AddAmount(state, action) {
-      state.totalAmount = state.totalAmount + action.payload.num;
+      action.payload.forEach((element) => {
+        if (element.status === "deActive") return;
+        state.totalAmount =
+          state.totalAmount + element.price * element.quantity;
+        state.totalCount = state.totalCount + element.quantity;
+      });
     },
     newItem(state, action) {
       state.items.push(action.payload.item);

@@ -4,32 +4,34 @@ class ApiEndpoints {
   static baseURL = `${this.serverURL}/api/v1`;
   // static baseURL = `/api/v1`;
 
-  static gethomeddata = `${baseURL}/homedata`;
+  static gethomeddata = `${this.baseURL}/homedata`;
 
-  static signup = `${baseURL}/user/signup`;
-  static setfirebase = `${baseURL}/user/set-ftoken`;
-  static checkfirebase = `${baseURL}/user/check-ftoken/Primary`;
-  static editprofile = `${baseURL}/user/profile`;
-  static getprofile = `${baseURL}/user/profile`;
+  static user = `${this.baseURL}/user`;
 
-  static cart = `${baseURL}/cart`;
-  static getcart = `${baseURL}/cart`;
-  static deletecart = `${baseURL}/cart/63e88aeee2eb95eb1f572c76`;
-  static alldeletecart = `${baseURL}/cart/delete/all`;
-  static decrementcart = `${baseURL}/cart/decrement-quantity/`;
-  static incrementcart = `${baseURL}/cart/increment-quantity/`;
-  static statuscart = `${baseURL}/cart/change-status/63e88aeee2eb95eb1f572c76`;
+  static signup = `${this.user}/signup`;
+  static setfirebase = `${this.user}/set-ftoken`;
+  static checkfirebase = `${this.user}/check-ftoken/Primary`;
+  static editprofile = `${this.user}/profile`;
+  static getprofile = `${this.user}/profile`;
 
-  static product = `${baseURL}/product?page=1&limit=10`;
-  static productdetails = `${baseURL}/product/63e21b23ca8ce7cc8d1fde74`;
-  static productdetails = `${baseURL}/product/63e21b23ca8ce7cc8d1fde74`;
+  static cart = `${this.baseURL}/cart`;
+  static getcart = `${this.baseURL}/cart`;
 
-  static getorder = `${baseURL}/getorder`;
+  static deletecart = `${this.cart}/63e88aeee2eb95eb1f572c76`;
+  static alldeletecart = `${this.cart}/delete/all`;
+  static decrementcart = `${this.cart}/decrement-quantity/`;
+  static incrementcart = `${this.cart}/increment-quantity/`;
+  static statuscart = `${this.cart}/change-status`;
+
+  static product = `${this.baseURL}/product?`;
+  static productdetails = `${this.baseURL}/product/`;
+
+  static getorder = `${this.baseURL}/order/customer`;
 
   // static getsearch = `/getsearch`;
 
-  static getfilter = `/getfilter`;
-  static updatefilter = `/updatefilter`;
+  static getfilter = `${this.baseURL}/getfilter`;
+  static updatefilter = `${this.baseURL}/updatefilter`;
 
   // static homedata = `/homedata`;
 }

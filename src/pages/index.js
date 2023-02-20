@@ -18,6 +18,8 @@ function Home() {
     dispatch(addAmount({ num: 1003 }));
   }
 
+  
+
   const queryClient = useQueryClient();
 
   const productsData = useQuery({
@@ -32,9 +34,11 @@ function Home() {
     },
   });
 
+  
+
   // const mydata = useQuery("mydata", () => hello());
 
-  //using useQuery to fetch data from server and store in mydata from hello.js
+  // using useQuery to fetch data from server and store in mydata from hello.js
   // const mydata = useQuery("mydata", () => hello());
 
   // data from hello.js

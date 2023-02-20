@@ -1,26 +1,33 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import styles from "@/styles/Auth.module.scss";
 import { motion } from "framer-motion";
 import { signInWithPhoneNumber } from "firebase/auth";
 import { RecaptchaVerifier } from "firebase/auth";
 import { authentication } from "@/services/firebase-config";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { LocalStorageKeys } from "@/core/localStorageKeys";
+import { signin } from "@/services/auth";
+import { useRouter } from "next/router";
 function Auth() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [otp, setotp] = useState("");
   const [signIn, setSignIn] = useState(false);
+  const router = useRouter();
 
- const queryClient = useQueryClient();
+  const queryClient = useQueryClient();
 
-  const product = useQuery("productsData", () => homedata(), {
+  const product = useQuery(["productsData"], () => homedata(), {
     onSuccess: (data) => {
       console.log("data", data);
     },
   });
 
   //mutation to post data to server
-  const mutation = useMutation((data) => postdata(data), {
+  const mutation = useMutation((data) => signin(data), {
     onSuccess: (data) => {
-      console.log("data", data);
+      console.log("data", data?.token);
+      localStorage.setItem(LocalStorageKeys.userToken, data?.token);
+      router.push("/");
     },
   });
 
@@ -72,7 +79,9 @@ function Auth() {
         const user = result.user;
         console.log("Logged in");
         console.log(user);
-        mutation.mutate(user);
+        const token = { ftoken: user.accessToken };
+        console.log(token);
+        mutation.mutate(token);
 
         // usequery to post data to server
 
@@ -84,6 +93,10 @@ function Auth() {
         // ...
       });
   };
+
+  useEffect(() => {
+    LocalStorageKeys?.userToken ? router.push("/") : null;
+  }, []);
 
   return (
     <Fragment>
@@ -155,6 +168,7 @@ function Auth() {
           </div>
         </motion.div>
       </div>
+      
     </Fragment>
   );
 }
