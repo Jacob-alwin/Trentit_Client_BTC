@@ -15,9 +15,9 @@ class ApiEndpoints {
   static getprofile = `${this.user}/profile`;
 
   static cart = `${this.baseURL}/cart`;
-  static getcart = `${this.baseURL}/cart`;
+  static getcart = `${this.cart}/customer`;
 
-  static deletecart = `${this.cart}/63e88aeee2eb95eb1f572c76`;
+  static deletecart = `${this.cart}/`;
   static alldeletecart = `${this.cart}/delete/all`;
   static decrementcart = `${this.cart}/decrement-quantity/`;
   static incrementcart = `${this.cart}/increment-quantity/`;
@@ -26,7 +26,12 @@ class ApiEndpoints {
   static product = `${this.baseURL}/product?`;
   static productdetails = `${this.baseURL}/product/`;
 
-  static getorder = `${this.baseURL}/order/customer`;
+  static order = `${this.baseURL}/order`;
+
+  static getorder = `${this.order}/customer`;
+  static returnorder = `${this.order}/return/`;
+  static rejectorder = `${this.order}/reject/`;
+  static cancelorder = `${this.order}/cancel/`;
 
   // static getsearch = `/getsearch`;
 

@@ -14,16 +14,17 @@ export const GetCart = async () => {
 };
 
 export const IncrementCartItem = async (id) => {
-  const response = await httpClient().put(ApiEndpoints.incrementcart + id);
+  console.log(id);
+  const response = await httpClient().patch(ApiEndpoints.incrementcart + id);
   return response.data;
 };
 
 export const DecrementCartItem = async (id) => {
-  const response = await httpClient().put(ApiEndpoints.decrementcart + id);
+  const response = await httpClient().patch(ApiEndpoints.decrementcart + id);
   return response.data;
 };
 
-export const GetOrder = async (id) => {
-  const response = await httpClient().put(ApiEndpoints.getorder);
+export const RemoveCartItem = async (id) => {
+  const response = await httpClient().delete(ApiEndpoints.deletecart + id);
   return response.data;
 };

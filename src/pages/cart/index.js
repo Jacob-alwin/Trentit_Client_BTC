@@ -4,7 +4,12 @@ import Image from "next/image";
 import { cart } from "@/data/data";
 import { useSelector } from "react-redux";
 import { dispatch } from "@/redux/store";
-import { addAmount } from "@/redux/reducers/cart";
+import {
+  addAmount,
+  DecrementItem,
+  IncrementItem,
+  InsertCart,
+} from "@/redux/reducers/cart";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { DecrementCartItem, GetCart, IncrementCartItem } from "@/services/cart";
 
@@ -12,10 +17,9 @@ import { DecrementCartItem, GetCart, IncrementCartItem } from "@/services/cart";
 // import { Rating } from "react-simple-star-rating";
 
 function Cart() {
+  const queryClient = useQueryClient();
+
   const cartlist = useSelector((state) => state.cart);
-  function AddAmount() {
-    dispatch(addAmount({ num: 1003 }));
-  }
 
   // Add iteems to cart
   const [cart, setCart] = useState([]);
@@ -47,13 +51,12 @@ function Cart() {
     }
   };
 
-  const queryClient = useQueryClient();
   const cartData = useQuery({
     queryKey: ["cartData"],
     queryFn: () => GetCart(),
     onSuccess: (data) => {
       if (data.success) {
-        dispatch(AddAmount(data.data));
+        dispatch(InsertCart(data?.data));
       } else alert(data.message);
     },
   });
@@ -62,12 +65,24 @@ function Cart() {
 
   // }, [cartData.data]);
 
+  const AddNewOrder = useMutation(
+    (product_id) => IncrementCartItem(product_id),
+    {
+      onSuccess: (data) => {
+        if (data.success) {
+          // #TODO: update cart data
+        } else alert(data.message);
+      },
+    }
+  );
+
   const IncrementMutation = useMutation(
     (product_id) => IncrementCartItem(product_id),
     {
       onSuccess: (data) => {
         if (data.success) {
           // #TODO: update cart data
+          dispatch(IncrementItem(data?.data));
         } else alert(data.message);
       },
     }
@@ -79,6 +94,8 @@ function Cart() {
       onSuccess: (data) => {
         if (data.success) {
           // #TODO: update cart data
+          console.log(data);
+          dispatch(DecrementItem(data?.data));
         } else alert(data.message);
       },
     }
@@ -107,14 +124,12 @@ function Cart() {
       <section className={styles.Order}>
         <div className={styles.OrderList}>
           <div>
-            {/* Avtive Orders */}
-
             <div className={styles.OrderDetails}>
               <div className="d-flex justify-content-between  ">
-                {/* <dl>
-                      <dt>Order ID- {data.id}</dt>
-                      <dt>{data.products.length} Item(s) Order Placed</dt>
-                    </dl> */}
+                <dl>
+                  <dt>Order ID</dt>
+                  <dt>{cartlist.totalCount} Item(s) Order Placed </dt>
+                </dl>
 
                 <button className="bg-success" type="">
                   Order
@@ -128,17 +143,18 @@ function Cart() {
                 <dd>{/* {data.date} I {data.time} */}</dd>
               </dl>
 
-              <h5>Your Order</h5>
+              <h5>Your Cart</h5>
               <ul>
-                {cartlist.items.map((product, index) => {
+                {cartlist.items.map((data, index) => {
+                  const product = data.product;
                   return (
                     <li
                       key={index}
                       className="d-flex justify-content-between mb-2 py-2"
                     >
                       <div className="d-flex justify-content-between ">
-                        <Image
-                          src={product.image}
+                        {/* <Image
+                          src={product.image.key}
                           alt={product.name}
                           width={100}
                           height={101}
@@ -146,7 +162,7 @@ function Cart() {
                             objectFit: "contain",
                           }}
                           priority
-                        />{" "}
+                        />{" "} */}
                         <div>
                           <h4>{product.name}</h4>
                           <p>{product.description}</p>
@@ -155,23 +171,28 @@ function Cart() {
                         </div>
                       </div>
                       <div>
-                        {" "}
-                        <span
+                        <button
                           onClick={() => {
-                            IncrementMutation.mutate(product._id);
+                            alert("hello");
+                            if (product.quantity >= 0) {
+                              // IncrementMutation.mutate(data._id);
+                              DecrementMutation.mutate(data._id);
+                            }
                           }}
                         >
-                          +
-                        </span>{" "}
-                        Qty-{product.quantity}{" "}
-                        <span
+                          Add
+                        </button>
+                        <button
                           onClick={() => {
-                            if (product.quantity > 1)
-                              DecrementMutation.mutate(product._id);
+                            alert("hello");
+
+                            if (data.quantity > 1)
+                              DecrementMutation.mutate(data._id);
                           }}
                         >
-                          -
-                        </span>{" "}
+                          Remove
+                        </button>
+                        Qty- {data.quantity}{" "}
                       </div>
                     </li>
                   );
@@ -185,6 +206,9 @@ function Cart() {
                     <strong>{cartlist.totalAmount}</strong>
                   </li>
                 </ul>
+                <button className="btn btn-outlines-primary " type="">
+                  Cart
+                </button>
               </div>
             </div>
           </div>
