@@ -29,7 +29,7 @@ const cartInitState = {
     //   __v: 0,
     // },
   ],
-  totalAmount: 30000,
+  totalAmount: 0,
   totalCount: 0,
 };
 
@@ -69,31 +69,33 @@ const cartSlice = createSlice({
     },
 
     newItem(state, action) {
-      state.items.push(action.payload.item);
+      console.log(action.payload);
       state.totalAmount =
-        state.totalAmount +
-        action.payload.item.price * action.payload.item.quantity;
+        state.totalAmount + action.payload.price * action.payload.quantity;
+      state.totalCount++;
+      state.items.push(action.payload);
     },
+    
     removeItem(state, action) {
-      state.items = state.items.filter((item) => item.id !== action.payload.id);
-      state.totalAmount = state.totalAmount - action.payload.num;
+      console.log(action.payload);
+      console.log(state.items);
+      alert("Item Removed cart in redux ");
+
+      const index = state.items.findIndex(
+        (item) => item._id === action.payload
+      );
+      if (index === -1) {
+        alert("Item not found");
+        return;
+      }
+      alert("Item found");
+      state.totalAmount =
+        state.totalAmount -
+        state.items[index].price * state.items[index].quantity;
+      state.totalCount = state.totalCount - state.items[index].quantity;
+      state.items.splice(index, 1);
     },
 
-    // updateQuantity(state, action) {
-    //   const index = state.items.findIndex(
-    //     (item) => item.id === action.payload.id
-    //   );
-    //   const oldItem = state.items[index];
-    //   state.totalAmount =
-    //     state.totalAmount -
-    //     oldItem.price * oldItem.quantity +
-    //     action.payload.item.price * action.payload.item.quantity;
-    //   state.items[index] = action.payload.item;
-    // },
-    // setItems(state, action) {
-    //   state.items = action.payload.items;
-    //   state.totalAmount = action.payload.totalAmount;
-    // },
   },
 });
 
@@ -102,6 +104,7 @@ export const {
   newItem,
   IncrementItem,
   DecrementItem,
+  removeItem,
 
   // removeItem,
   // updateItem,

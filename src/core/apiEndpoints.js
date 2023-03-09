@@ -25,6 +25,9 @@ class ApiEndpoints {
 
   static product = `${this.baseURL}/product?`;
   static productdetails = `${this.baseURL}/product/`;
+  static productcategory = `${this.baseURL}/product/category/`;
+  static productbrand = `${this.baseURL}/product/brand/`;
+  static productcategorybrand = `${this.baseURL}/product/category-brand/`;
 
   static order = `${this.baseURL}/order`;
 
@@ -35,9 +38,7 @@ class ApiEndpoints {
 
   // static getsearch = `/getsearch`;
 
-  static getfilter = `${this.baseURL}/getfilter`;
-  static updatefilter = `${this.baseURL}/updatefilter`;
-
+  
   // static homedata = `/homedata`;
 }
 

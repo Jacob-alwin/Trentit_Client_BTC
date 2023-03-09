@@ -7,7 +7,7 @@ import { authentication } from "@/services/firebase-config";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { LocalStorageKeys } from "@/core/localStorageKeys";
 import { signin } from "@/services/auth";
-import { useRouter } from "next/router";
+import { Router, useRouter } from "next/router";
 function Auth() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [otp, setotp] = useState("");
@@ -27,7 +27,7 @@ function Auth() {
     onSuccess: (data) => {
       console.log("data", data?.token);
       localStorage.setItem(LocalStorageKeys.userToken, data?.token);
-      router.push("/");
+      router.replace("/");
     },
   });
 
@@ -95,7 +95,9 @@ function Auth() {
   };
 
   useEffect(() => {
-    LocalStorageKeys?.userToken ? router.push("/") : null;
+    if (localStorage.getItem(LocalStorageKeys.userToken)) {
+      router.push("/");
+    }
   }, []);
 
   return (
@@ -168,7 +170,6 @@ function Auth() {
           </div>
         </motion.div>
       </div>
-      
     </Fragment>
   );
 }

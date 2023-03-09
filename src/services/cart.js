@@ -25,6 +25,7 @@ export const DecrementCartItem = async (id) => {
 };
 
 export const RemoveCartItem = async (id) => {
+  console.log("remove "+id);
   const response = await httpClient().delete(ApiEndpoints.deletecart + id);
   return response.data;
 };

@@ -4,6 +4,19 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
+        <link rel="icon" href="/logo.png" />
+        {/* <meta name="viewport" content="width=device-width, initial-scale=1" /> */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@trentit" />
+        <meta name="twitter:creator" content="@trentit" />
+        <meta name="twitter:title" content="Trentit - Refurbished Sellers" />
+        <meta
+          name="twitter:description"
+          content="Trentit - Refurbished Sellers"
+        />
+        {/* <title>Trentit</title> */}
+        <meta name="twitter:image" content="/logo.png" />
+
         <link
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
           rel="stylesheet"

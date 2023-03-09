@@ -11,20 +11,39 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 // import { homedata } from "@/services/common";
 import Link from "next/link";
 import { AddCart } from "@/services/cart";
+import {
+  brandproducts,
+  categorybrandproducts,
+  categoryproducts,
+} from "@/services/product";
 
 function Home() {
+  
   const cart = useSelector((state) => state.cart);
+
   function AddAmount() {
     dispatch(addAmount({ num: 1003 }));
   }
 
-  
-
   const queryClient = useQueryClient();
 
-  const productsData = useQuery({
-    queryKey: ["productsData"],
-    queryFn: () => homedata(),
+  const productcategory = useQuery({
+    queryKey: ["productsDataCategory"],
+    queryFn: () => categoryproducts(),
+    category: "Phone",
+  });
+
+  const productbrand = useQuery({
+    queryKey: ["productsDataBrand"],
+    queryFn: () => brandproducts(),
+    brand: "Readme",
+  });
+
+  const productcategorybrand = useQuery({
+    queryKey: ["productsDataCategoryBrand"],
+    queryFn: () => categorybrandproducts(),
+    category: "Phone",
+    brand: "Readme",
   });
 
   const cartMutation = useMutation((product_id) => AddCart(product_id), {
@@ -33,8 +52,6 @@ function Home() {
       else alert(data.message);
     },
   });
-
-  
 
   // const mydata = useQuery("mydata", () => hello());
 
@@ -59,12 +76,12 @@ function Home() {
           <div className={styles.bannersection}>
             <div className={styles.banner}>
               <h2 className="animate__animated animate__fadeInDown">
-                Buy your pre-owned product with
-                <span onClick={AddAmount}>{cart.totalAmount}...</span>
+                Buy your Re-furbished product with
+                <span>Assurance....</span>
               </h2>
               <h5 className="animate__animated animate__fadeInUp">
-                Trentit directly verify each product with many quality check and
-                give you proper brief and actual image behalf of buyer.
+                Trent it directly verify each product with many quality check
+                and give you proper brief and actual image behalf of buyer.
               </h5>
 
               <div className={styles.bannerimg}>
@@ -110,8 +127,7 @@ function Home() {
 
           <div className={styles.categoryTile}>
             <div className={styles.categoryParallaxContainer}>
-              {/* <div className={styles.freeSpace}></div> */}
-              {homedata.map((data, index) => {
+              {/* {homedata.map((data, index) => {
                 return (
                   <div
                     key={index}
@@ -204,7 +220,7 @@ function Home() {
                     </div>
                   </div>
                 );
-              })}
+              })}  */}
             </div>
           </div>
         </motion.div>

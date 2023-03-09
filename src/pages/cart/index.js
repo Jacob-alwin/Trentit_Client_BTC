@@ -1,7 +1,6 @@
 import React, { Fragment, useState } from "react";
 import styles from "@/styles/Order.module.scss";
 import Image from "next/image";
-import { cart } from "@/data/data";
 import { useSelector } from "react-redux";
 import { dispatch } from "@/redux/store";
 import {
@@ -51,15 +50,15 @@ function Cart() {
     }
   };
 
-  const cartData = useQuery({
-    queryKey: ["cartData"],
-    queryFn: () => GetCart(),
-    onSuccess: (data) => {
-      if (data.success) {
-        dispatch(InsertCart(data?.data));
-      } else alert(data.message);
-    },
-  });
+  // const cartData = useQuery({
+  //   queryKey: ["cartData"],
+  //   queryFn: () => GetCart(),
+  //   onSuccess: (data) => {
+  //     if (data.success) {
+  //       dispatch(InsertCart(data?.data));
+  //     } else alert(data.message);
+  //   },
+  // });
 
   // useEffect(() => {
 
@@ -127,12 +126,12 @@ function Cart() {
             <div className={styles.OrderDetails}>
               <div className="d-flex justify-content-between  ">
                 <dl>
-                  <dt>Order ID</dt>
-                  <dt>{cartlist.totalCount} Item(s) Order Placed </dt>
+                  <dt>My Cart</dt>
+                  <dt>{cartlist.totalCount} Item(s) in Cart </dt>
                 </dl>
 
                 <button className="bg-success" type="">
-                  Order
+                  Cart
                 </button>
               </div>
 
@@ -171,28 +170,29 @@ function Cart() {
                         </div>
                       </div>
                       <div>
-                        <button
+                        <span
                           onClick={() => {
-                            alert("hello");
+                            // alert("Increment");
                             if (product.quantity >= 0) {
-                              // IncrementMutation.mutate(data._id);
-                              DecrementMutation.mutate(data._id);
+                              IncrementMutation.mutate(data._id);
                             }
                           }}
+                          // className="btn btn-outline-primary"
                         >
-                          Add
-                        </button>
-                        <button
+                          +
+                        </span>
+                        Qty- {data.quantity}{" "}
+                        <span
                           onClick={() => {
-                            alert("hello");
+                            // alert("Decrement");
 
                             if (data.quantity > 1)
                               DecrementMutation.mutate(data._id);
                           }}
+                          // className="btn btn-outline-primary"
                         >
-                          Remove
-                        </button>
-                        Qty- {data.quantity}{" "}
+                          -
+                        </span>
                       </div>
                     </li>
                   );
@@ -206,8 +206,8 @@ function Cart() {
                     <strong>{cartlist.totalAmount}</strong>
                   </li>
                 </ul>
-                <button className="btn btn-outlines-primary " type="">
-                  Cart
+                <button className="btn btn-outline-primary " type="">
+                  Order
                 </button>
               </div>
             </div>

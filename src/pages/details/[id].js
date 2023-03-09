@@ -2,9 +2,11 @@ import React, { Fragment, useState } from "react";
 import styles from "@/styles/Details.module.scss";
 import { motion } from "framer-motion";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { AddCart, RemoveCartItem } from "@/services/cart";
+import { AddCart, GetCart, RemoveCartItem } from "@/services/cart";
 import { useRouter } from "next/router";
 import { productdetails } from "@/services/product";
+import { InsertCart, newItem, removeItem } from "@/redux/reducers/cart";
+import { dispatch } from "@/redux/store";
 // import Carousel3d from "../../../common/Carousel3d";
 // import RS from "../../images/Svg/Rs.svg";
 
@@ -66,25 +68,9 @@ function Details() {
   const [available, setAvailable] = useState(0);
   const [loading, setLoading] = useState(false);
   const [cart, setcart] = useState(false);
+  const [cartId, setcartId] = useState("");
 
   const queryClient = useQueryClient();
-
-  const addcartMutation = useMutation((product_id) => AddCart(product_id), {
-    onSuccess: (data) => {
-      if (data.success) queryClient.invalidateQueries("cartData");
-      else alert(data.message);
-    },
-  });
-
-  const removecartMutation = useMutation(
-    (product_id) => RemoveCartItem(product_id),
-    {
-      onSuccess: (data) => {
-        if (data.success) queryClient.invalidateQueries("cartData");
-        else alert(data.message);
-      },
-    }
-  );
 
   const detailsData = useQuery({
     queryKey: ["detailsData", id],
@@ -92,16 +78,68 @@ function Details() {
     enabled: !!id,
   });
 
-  function handleAdd() {
-    setcart(!cart);
+  const cartData = useQuery({
+    queryKey: ["cartData"],
+    queryFn: () => GetCart(),
+    enabled: !!id,
 
+    onSuccess: (data) => {
+      if (data?.data?.length > 0) {
+        console.log(data.data);
+        console.log(id);
+        if(id)
+        {
+
+          console.log( data.data.find((item) => item.product._id === id));
+          setcart(data.data.some((item) => item.product._id === id));
+          setcartId(data.data.find((item) => item.product._id === id)._id);
+        }
+      } else {
+        setcart(false);
+      }
+    },
+  });
+
+
+
+
+
+  console.log(cartData);
+
+
+  //email to say that thanking for the meeting for reactjs role
+  //email to say that thanking for the meeting for reactjs role
+  //email to say that thanking for the meeting for reactjs role
+
+  const addcartMutation = useMutation((product_id) => AddCart(product_id), {
+    onSuccess: (data) => {
+      console.log(data);
+      if (data.success) {
+        queryClient.invalidateQueries("cartData");
+        console.log(data.data);
+        dispatch(newItem(data.data));
+      } else alert(data.message);
+    },
+  });
+
+  const removecartMutation = useMutation((deleteId) => RemoveCartItem(deleteId), {
+    onSuccess: (data) => {
+      if (data.success) {
+        queryClient.invalidateQueries("cartData");
+        dispatch(removeItem(cartId));
+      } else alert(data.message);
+    },
+  });
+
+  function handleAdd(deleteId) {
     if (cart) {
       alert("Item Remove ");
-      removecartMutation.mutate(detailsData.data.data._id);
+      removecartMutation.mutate(deleteId);
     } else {
       alert("Item Added ");
       addcartMutation.mutate(detailsData.data.data._id);
     }
+    setcart(!cart);
 
     alert("Cart Status Changed ");
   }
@@ -117,7 +155,7 @@ function Details() {
           <div className={styles.LapDetails}>
             {/* <Carousel3d /> */}
             <div
-              className={styles.Container + " d-flex justify-content-between"}
+              className={styles.Container + " "}
             >
               <div className={styles.Slide}>
                 <div className={styles.ShortDes + " "}>
@@ -151,9 +189,8 @@ function Details() {
                   <h4>
                     {/* <span onClick={() => handleAdd()}>+</span>
                     {available}
-                    <span>-</span> */}
-
-                    {/* <p>Auction Date</p> */}
+                    <span>-</span>
+                    <p>Auction Date</p> */}
                   </h4>
                   <li>
                     <h2>{detailsData.data.data.grade}</h2>
@@ -164,16 +201,15 @@ function Details() {
                   <h5>₹ {detailsData.data.data.purchasePrice}</h5>
 
                   <motion.div className={styles.favourite + " d-flex m-2 "}>
-                    <motion.button
+                    <motion.i
                       whileHover={{ scale: 1.2 }}
-                      onClick={
-                        () => e.StopPropagation()
-                        //  handleAdd()
-                      }
+                      onClick={() => {
+                        handleAdd(cartId);
+                      }}
                       className={
                         cart ? "bi bi-cart-plus-fill" : "bi bi-cart-plus"
                       }
-                    ></motion.button>
+                    ></motion.i>
                   </motion.div>
                 </div>
                 {/* <div className={styles.SellerInfo}>
@@ -200,13 +236,13 @@ function Details() {
 
                     <button
                       onClick={() => {
-                        removecartMutation.mutate(detailsData.data.data._id);
+                        addcartMutation.mutate(detailsData.data.data._id);
                       }}
                     >
                       <span></span>
                       <motion.i
+                        className={styles.currency + " bi bi-cart-plus-fill"}
                         whileHover={{ scale: 1.2 }}
-                        className="bi bi-cart-plus-fill"
                       ></motion.i>
 
                       <h5>Buy</h5>

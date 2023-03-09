@@ -13,6 +13,7 @@ export default function List() {
 
   const router = useRouter();
   const { query } = router;
+  console.log("query", query.query);
   // const product = useQuery("productsData", () => allproducts(), {
   //   onSuccess: (data) => {
   //     console.log("data", data);
@@ -21,7 +22,7 @@ export default function List() {
 
   const product = useQuery({
     queryKey: ["productsData", query],
-    queryFn: () => allproducts(query),
+    queryFn: () => allproducts(query.query),
     enabled: !!query,
   });
 

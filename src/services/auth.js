@@ -10,6 +10,7 @@ export const signin = async (data) => {
       throw new Error(response.data.message);
     }
     localStorage.setItem(LocalStorageKeys.userToken, response.data.token);
+    console.log(response.data.token);
     return response.data;
   } catch (error) {
     dispatch(setErrorMessage(error.message));
