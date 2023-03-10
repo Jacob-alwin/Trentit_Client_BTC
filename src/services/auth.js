@@ -20,7 +20,7 @@ export const signin = async (data) => {
 
 export const getUserProfile = async () => {
   try {
-    const response = await httpClient().get(ApiEndpoints.profile);
+    const response = await httpClient().get(ApiEndpoints.getprofile);
     if (response.status > 201 || !response.data.success) {
       throw new Error(response.data.message);
     }
@@ -33,7 +33,7 @@ export const getUserProfile = async () => {
 
 export const updateProfile = async (data) => {
   try {
-    const response = await httpClient().post(ApiEndpoints.updateprofile, data);
+    const response = await httpClient().post(ApiEndpoints.editprofile, data);
     if (response.status > 201 || !response.data.success) {
       throw new Error(response.data.message);
     }

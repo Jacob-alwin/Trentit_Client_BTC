@@ -23,7 +23,7 @@ export const allproducts = async (query) => {
 export const categoryproducts = async (query, category) => {
   try {
     const response = await httpClient().get(
-      ApiEndpoints.productcategory + `${category}?`,
+      ApiEndpoints.productcategory + `${category}`,
       {
         params: {
           page: 1,
@@ -44,7 +44,7 @@ export const categoryproducts = async (query, category) => {
 export const brandproducts = async (query, brand) => {
   try {
     const response = await httpClient().get(
-      ApiEndpoints.productbrand + `${brand}?`,
+      ApiEndpoints.productbrand + `${brand}`,
       {
         params: {
           page: 1,
@@ -65,7 +65,7 @@ export const brandproducts = async (query, brand) => {
 export const categorybrandproducts = async (query, brand, category) => {
   try {
     const response = await httpClient().get(
-      ApiEndpoints.productcategorybrand + `${category}/${brand}?`,
+      ApiEndpoints.productcategorybrand + `${category}/${brand}`,
       {
         params: {
           page: 1,

@@ -11,8 +11,8 @@ class ApiEndpoints {
   static signup = `${this.user}/signup`;
   static setfirebase = `${this.user}/set-ftoken`;
   static checkfirebase = `${this.user}/check-ftoken/Primary`;
-  static editprofile = `${this.user}/profile`;
-  static getprofile = `${this.user}/profile`;
+  static editprofile = `${this.user}/profile/`;
+  static getprofile = `${this.user}/profile/`;
 
   static cart = `${this.baseURL}/cart`;
   static getcart = `${this.cart}/customer`;
@@ -38,7 +38,6 @@ class ApiEndpoints {
 
   // static getsearch = `/getsearch`;
 
-  
   // static homedata = `/homedata`;
 }
 

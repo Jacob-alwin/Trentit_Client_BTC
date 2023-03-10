@@ -18,7 +18,6 @@ import {
 } from "@/services/product";
 
 function Home() {
-  
   const cart = useSelector((state) => state.cart);
 
   function AddAmount() {
@@ -29,19 +28,19 @@ function Home() {
 
   const productcategory = useQuery({
     queryKey: ["productsDataCategory"],
-    queryFn: () => categoryproducts(),
+    queryFn: () => categoryproducts("Pho", "Phone"),
     category: "Phone",
   });
 
   const productbrand = useQuery({
     queryKey: ["productsDataBrand"],
-    queryFn: () => brandproducts(),
-    brand: "Readme",
+    queryFn: () => brandproducts("Red", "Readme"),
+    // brand: "Readme",
   });
 
   const productcategorybrand = useQuery({
     queryKey: ["productsDataCategoryBrand"],
-    queryFn: () => categorybrandproducts(),
+    queryFn: () => categorybrandproducts("PhoRed", "Readme", "Phone"),
     category: "Phone",
     brand: "Readme",
   });

@@ -205,11 +205,12 @@ export default function Index() {
                     color: "black",
                   }}
                   key={index}
-                  href={`/details/${item._id}`}
+                  href={`/${item._id}`}
                 >
                   <div className={styles.item} style={{ marginBottom: "3vw" }}>
                     <Image
-                      src="/thirteen.svg"
+                      // src={item.image.key}
+                      src="/thirteen.png"
                       alt="13"
                       width={100}
                       height={101}
